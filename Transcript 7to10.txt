@@ -1,3871 +1,1903 @@
-Later.
-
-Now look at ABC.
-
-With regard to the 819 exam, we need to be able to connect to and perform databases, QOL operations
-
-and process query results using the GDP CPI.
-
-We don't need to know about primary keys.
-
-Kampong Keys, knowing how to read or write.
-
-School is not on the exam.
-
-Spotting syntax errors in school statements is not on the exam, and we're not expected to write school
-
-statements either.
-
-However, the examples that I'll be using here, it's not hard to have a high level knowledge of us
-
-gives you confidence going into the exam, and also it helps in being able to follow the examples that
-
-I'll be using.
-
-JD B C, which stands for Java Database Connectivity, accesses the data as rows and columns.
-
-A relational database organizes data into tables consisting of rows and columns.
-
-We use SQL, which stands for Structured Query Language, to interact with a relational database.
-
-And the examples that I'll be using here use the Dharavi database, which is from Apache.
-
-Here is a sample relational database.
-
-It's a banking table.
-
-The data is organized in rows.
-
-And then the columns are a branch called account number, customer name, customer address and balance.
-
-So three rows and we have five columns.
-
-The columns are known as metadata to tell you information about the data.
-
-In other words, that one, two, three, four, five, six is the branch code.
-
-One, two, three, four, five, six, seven, eight is an account number.
-
-Very important table.
-
-To understand that you need to know two CRUD operations which are create, read, update and delete.
-
-So the most important thing with regard to scale for the example is that there are four types of statements
-
-for working with data in tables.
-
-These are known as the cloud operations.
-
-Create, read.
-
-Update, delete.
-
-If you want to create, then that is the actual insert keyword that inserts a new rule into the table.
-
-If you want to read that skill, select which retrieves data from the table.
-
-If you want to do an update, that SQL update that changes data in zero or more rules.
-
-And if you wanted to delete that as well, delete which delete zero or more rules from the table.
-
-And we'll have examples of each of those coming up.
-
-What I'd like to do now is have a look at the banking table and give an overview of how I create the
-
-table, how I publish, because this table is used throughout my examples.
-
-This is my banking example.
-
-I'm using NetBeans and you can see here I've got the service tab.
-
-I've got a bank on Discord Deep database created.
-
-And when I connect to that, it uses Derby.
-
-There's local horse 1527, that's the port number and there is the database.
-
-I'm using an app schema and there you can see the bank table.
-
-When I go right click on that execute command.
-
-It'll come up with this view here where you can type in obscure commands.
-
-You can see how connected there to that or be database bank underscore DB.
-
-This particular sequence of commands.
-
-One is to drop the table.
-
-In other words, delete the table completely.
-
-That obviously is going to have a problem the very first time around us, but subsequently it will remove
-
-the table completely.
-
-Then I'm using the creative in app.
-
-That's the schema baked.
-
-Here was the name of the table.
-
-And then I have a list of columns with their data types beside them.
-
-Var Char is like string and I'm allowing ten characters far.
-
-If it isn't ten characters at length, var char means variable character.
-
-It'll only use the amount of space that it needs.
-
-Account number is essentially a string.
-
-Ten is the max code name.
-
-20 Cluster address, 50 balances decimal.
-
-That's like a java double.
-
-The primary key is the branch code and the account number combined together.
-
-So an account number could actually be the same in two different branches, but the branch code will
-
-differentiate between them.
-
-Again, not necessary for the exam.
-
-But it's no harm to know.
-
-Then on line 13, I'm inserting my first record insert into the table values, and the values are by
-
-default in the order that the columns are defined.
-
-So one, two, three, four, five, six is the branch code.
-
-Line 16 corresponds to the column on line six.
-
-Your blogs have the cross name of Lorne as the cost address.
-
-The balance is 300.0.
-
-Vouchers are inserted in single quotes.
-
-So that's the first rule that's going in.
-
-I'll cover delimiting them.
-
-There is another rule in wrong brackets.
-
-That's the second rule.
-
-And then there is the third rule.
-
-When I run that, it recreates the table.
-
-I go over here into my app schema, into tables that I right click on bank table and go view data.
-
-And there you can see there is my table with the three rows and the various columns populations.
-
-So any time I want to recreate the table after making some changes, I'll just go to that window there
-
-and run it again.
-
-And then I just go back to this window, rerun that, scroll to see the data in the table.
-
-Connecting to a database here.
-
-We have to understand the various parts of the GDP.
-
-See u.
-
-R.
-
-L.
-
-It consists of three parts, each of them separated by a colon.
-
-The first part is the protocol and it is always good to be see.
-
-The next part is the sub protocol and this is the vendor or product name, for example, derby, which
-
-is the one that I'll be using or could be my well, oracle postgresql.
-
-The sudden name.
-
-The last part is the database connection details.
-
-You can see I've given three valid examples here.
-
-There you can see GWC call Colon Derby on all three.
-
-Then I've got a local horse to call at 1527 for such a bank underscore db.
-
-On the first one I'm including the port name on this localhost is essentially the current machine.
-
-It's a name identifying the current machine.
-
-Its IP address is 127.0.0.1.
-
-The second option, I'm actually leaving the port out because it's optional when you're using localhost.
-
-The third option is using the actual IP address of localhost.
-
-Here is set up a piece of code connecting to the database.
-
-Now we have interfaces and classes that are all in the Java.
-
-That school package driver manager is the first one.
-
-It's a factory class for creating the database connection.
-
-The interfaces are connection, prepared statement, result, access.
-
-And there's another one driver that I'm not using here in my constructor.
-
-I am using the factory pattern for creating the connection.
-
-It's driver manager dot get connection.
-
-There's the URL.
-
-Then there's a username and password.
-
-Obviously you would never expose your password.
-
-It should be loaded in from an external resource and preferably encrypted.
-
-However, this is just a demo.
-
-So that's why you see Sean and Sean there.
-
-I have to catch a school exception because that is a checked exception that is drawn by the get connection
-
-method in driver manager.
-
-Know all of the interfaces and the required classes are in the driver jar file.
-
-You can see a sample there where I'm running that particular application by executing it from the command
-
-prompt and the hyphen KPIs for the class path.
-
-Then the path to Darby.
-
-And then Darby.
-
-Obviously that path to Darby would be customizable to whatever your path is.
-
-The driver manager is one of two ways of actually creating a connection.
-
-The other one is data source.
-
-Now in industry you would use data source.
-
-It's far more efficient.
-
-However, driver manager is the one that is specified for the it will need an exam and that's the one
-
-that we'll be using as a result.
-
-For older drivers, you might see code like closed off for him to load up the driver.
-
-That's not needed for newer drivers.
-
-So let me run that in code.
-
-So I've just put in an empty main method so I don't get an error, but not having men from the environment.
-
-And there you can see connecting to the database.
-
-Okay.
-
-Prepared statement, both prepared statement and callable statement are sub interfaces of statement.
-
-We'll talk later about callable statement.
-
-For the moment, we're just going to focus on prepared statement.
-
-A prepared statement enables us to execute Escuela commands, structured query language commands.
-
-We will use the connection object to get a prepared statement.
-
-So the driver manager will give us the connection.
-
-The connection will give us the prepared statement, and then the prepared statement enables us to execute
-
-the cure.
-
-Here is a sample.
-
-I've got a string which I've initialized to some SQL syntax insiders.
-
-Selector from app dot bank table means retrieve everything from the bank table.
-
-We need to know that select is a retrieve.
-
-Other than that, we're okay.
-
-I've got to try the resource statement then whereby I am using the connection object which to prepare
-
-statement passing in the squirrel to give us back a prepared statement.
-
-So we use the connection object to give us the prepared statement.
-
-I could have used the VAR Peace is a sane conduct.
-
-Prepare a statement passing in the school string as well.
-
-That's okay.
-
-However, you must pass in a string to prepare a statement.
-
-It is a compiler error to just say prepare a statement.
-
-Open room brackets.
-
-Clause from brackets.
-
-Note also that we have to catch the checked exception askew, an exception which is thrown by the prepare
-
-statement method.
-
-Once we have the prepared statement, we can now run some as well.
-
-However, the type of rescue well statement determines what method you use to run it.
-
-For example, if you wanted to do a query that is a select and you would use the execute query method
-
-on the prepared statement, and that will give you a back a result set, which is basically the data
-
-that you want back.
-
-If you're making a change to the database and insert an update or a delete for adding rules, changing
-
-rules or removing rules, all of those would use the execute update method and that returns back the
-
-number of rules affected.
-
-However, you can do all of those operations retrieving, adding, changing, deleting and other words
-
-select, insert, update and delete using the execute method.
-
-What that returns back is a boolean as to whether or not you did a query.
-
-In other words, can you go and get the results?
-
-So in other words, if results that comes back with true, you would then go and use the get results
-
-set on the prepared statement.
-
-In other words, you did do a query.
-
-Therefore, this is how you get the results.
-
-Now.
-
-If, however, the execute method comes back with false, then you did an update.
-
-So you choose to get update count to retrieve the number of rules affected.
-
-I now like to look at an example.
-
-It's a banking example.
-
-It'll cover those types of methods, but it'll also include buying variables, the cursor column starting
-
-at one, the result set and so on.
-
-So the bank example just to quickly review here is the scale that I run to create the table and insert
-
-some records into the database.
-
-And then when I view them, you can see they're my records.
-
-They're.
-
-I have a Java bean to represent the bank account.
-
-We have strings for branch called account number, course name, cost address and a balance which is
-
-double.
-
-That's because the column types.
-
-Our vouchers except for the balance, which is decimal.
-
-So the bank account.
-
-I've got a constructor, an overloaded one, where I pass in all the arguments I've got, get and set
-
-methods for each of the properties and then I've got a two string at the bottom in the bank service
-
-then.
-
-I've got my connection, which is kept outside of all the methods.
-
-It's a class variable, so it's available to all of the methods.
-
-Then I connect to the database using a call to the constructor and I use the driver manager to get connection
-
-to connect to the database.
-
-Then in main, I'm calling each of these methods.
-
-The first one I want to look at is retrieve one, which is going to retrieve a specific account number.
-
-So I go down to retrieve one here and there is the call to get account details, person down the branch
-
-code and the account number.
-
-So here is the select one taking in the branch code and the account number, the bind variables.
-
-This is the first time we have come across buying variables.
-
-Here.
-
-I'm setting up a string select as well and it's select star from APT at bank table where the branch
-
-code is equal to the first line variable and account number is equal to the second one.
-
-The question marks indicate the bind variables.
-
-That's the first one, obviously, and that's the second one.
-
-They're like a placeholder that we're going to populate at runtime.
-
-I initialize my bank account to NULL.
-
-I then have a out resources statement where I use the connection object prepare statement passing in
-
-the sequel to create a prepared statement.
-
-I then need to populate the bind variables.
-
-I use the set string on the prepared statement to do that.
-
-Number one is the first one they started one.
-
-Both the BI and variables and the columns as we'll see later.
-
-Start at one, not zero.
-
-So I'm passing in the branch code to populate that by an variable there.
-
-And the account number that this method receives goes into the second one, which is that one there.
-
-I then call the execute query.
-
-That means that the scale is a select and I will get back a result set.
-
-That's what execute query does.
-
-It comes back with the result set.
-
-I now need to move the cursor to the first row because the cursor is pointing just before the first
-
-row.
-
-So before I can read it, I need to move it to the first row.
-
-That's what this is statement is doing.
-
-It calls the R.
-
-S dot next that moves the cursor to the first rule.
-
-If there is one.
-
-If there is one.
-
-Okay.
-
-It'll come back with true.
-
-The Nash will make it false and I will not execute the statement and I will come down to here to process
-
-the record.
-
-However, if there is no record, if I have an invalid branch code and or account number, the rest
-
-up next will come back with false.
-
-Not false will come back with true and the estimate will execute an out of return bank account which
-
-is null online 92.
-
-So let's assume I do have a record there, which means the statement is not executed.
-
-We come down here to process the record.
-
-I come to the comments from the API in a second, but notice here on line 117.
-
-I am using a guess string.
-
-Now this is going to go to the result set and say give me back the column branch code from this particular
-
-record.
-
-The second one is get string and this time I am passing in a number.
-
-That is the account number.
-
-Number one would be the branch called.
-
-Number two is the account number and so on.
-
-Gets string cost name.
-
-Gets string cost address.
-
-They're all because they're strings inside their vouchers inside in the database table.
-
-That's why I'm using get string.
-
-And that's why I used set string on lines 1999 as well.
-
-North and online want 21 I'm using get double for the balance.
-
-That's because it's decimal in the database.
-
-Naughton the API there.
-
-I've got get boolean taking in a string for the column label.
-
-There's a get boolean that takes in an int for the column index.
-
-Does it get double which we're using for balance already?
-
-Column label is one we're using, but it's overloaded to take in a column index as well.
-
-There's also the same forget it does the same forget long and get object is a little different in that
-
-you have to pass in the class type, but it's overloaded for column level and column index if I have
-
-an exception to take care of that as an exception.
-
-That will be in the prepared statement that control and school exceptions.
-
-So we need to take care of that.
-
-Otherwise, I'll return the bank account.
-
-So if I go back to where it was called from, which is up here, I'll just execute that on its own for
-
-a minute.
-
-So I should just get back the details for branch code.
-
-One, two, three, four, five, six.
-
-Account number one, two, three, four, five, six, seven, eight.
-
-And I do job logs at loan 300.
-
-Let's double check that.
-
-Joel blogs at Alone 300.
-
-Now let's have a look at retrieving all of the records.
-
-So.
-
-I'll go to retrieval.
-
-So I've got a free tube here for each bank account in the get all accounts box coming back from get
-
-all accounts.
-
-Let's go down there.
-
-This is where we want to select all the accounts.
-
-So I'm creating an array list, which I'll be returning with the details.
-
-Musical is select star from Outer Banks here, and I don't have a where clause in this case, so that's
-
-going to give me back all of the records or the rules from the bank table.
-
-I've just got three.
-
-And then again passing in the school into the prepared statement which is available on the connection
-
-object.
-
-And that will give me back the prepared statement that I want to execute the school with.
-
-For variation, I'm going to use the execute method and it'll come back with a boolean is result set?
-
-I'll examine that is results that it come back with true because we did to a select.
-
-So now that I know it was a select, I go and use the get resolve set on the prepared statement to give
-
-me back the results says.
-
-Again.
-
-I need the next method on the results that the first one will position the cursor, and from then on
-
-it'll keep going.
-
-Eventually it'll be false and the whole statement will fail and we exit the loop.
-
-When I am processing any record, I am going to create a bank account and I'm going to pass in these
-
-arguments.
-
-Get string one.
-
-This time I used the number, the column index for the branch called whereas the get string account
-
-number, I'm going to use the actual column level in this case cos name, cost address, there are column
-
-labels and again get double for balance.
-
-There are passed into the constructor where I create a bank account and then I add that bank account
-
-to my ArrayList.
-
-If results that came back would false, I would then output that I did an update.
-
-There's the exception that you need to manage from the prepare statement and then I return the bank
-
-accounts.
-
-So let's go back up here and run that retrieval.
-
-And there you can see there are the three records that are in the database.
-
-Now let's have a look at deleting one record.
-
-So here's the delete one.
-
-I'm going to delete a bank account with that particular branch called and that account number it should
-
-come back with one so deleted.
-
-Okay.
-
-Otherwise delete error.
-
-So let's go to that method passing in the branch code and the account number.
-
-My dreams as school is very similar to the select one where I wanted to retrieve that particular branch
-
-called an account number, except I'm using a delete from the bank table where the branch cord is equal
-
-to that bein variable and the account number is equal to that by and variable.
-
-So they're placeholders that will be populated at runtime.
-
-Again.
-
-I need to pass in my skill into the prepared statement which is available on the connection object to
-
-get the prepared statement.
-
-I then need to populate the bind variables before I execute the script.
-
-I'm going to use that string.
-
-The first one is going to be the branch code.
-
-The second one is going to be the account number.
-
-Now, instead of execute query, it's going to be execute update on the prepared statement because I
-
-am making a change to the database beer to delete, beat and insert within an update.
-
-All of those three are considered changes to the database.
-
-So that would come back within rules, which should be one, and I'll return that and rules if I get
-
-an exception as an exception again, I'll put details about that.
-
-Let's run that.
-
-So there's the delete.
-
-Okay.
-
-With one record deleted.
-
-So let's have a look at the database table.
-
-This is the view of the table before I did the delete.
-
-Idolises the first record.
-
-There was the branch called one, two, three, four, five, six.
-
-The account number.
-
-One, two, three, four, five, six, seven, eight.
-
-Now I'm about to do a refresh and that record, one should be gone.
-
-And there you can see that record is gone.
-
-I'll just go back to this askew old statement here at that connection there and rerun it.
-
-And check that my database is populated again, which it is.
-
-So then I'll go back now and I look at the delete all.
-
-So that was the delete one.
-
-So the delete all is very straightforward.
-
-Delete all accounts the school is delete again from the table and is no huertas.
-
-So it's just going to delete all of the records so you can see the delete and select quite similar set
-
-up.
-
-The prepared statement is the connection object and the prepare statement passing in the school and
-
-then called execute update.
-
-I run that.
-
-Let's check the records and they're all gone.
-
-Now let's look at AD.
-
-So here I'm calling the ad account method and a person on a new bank account with details that are not
-
-in the database.
-
-Let me just double check what's in the database.
-
-There's the three records of old.
-
-If the number of rules is equivalent to one come back then put that the is okay.
-
-Otherwise I'll put another.
-
-So let's look at ad bank account taking in a bank account object.
-
-Here is my insert as well.
-
-So when you're adding you're using the insert.
-
-Well, insert the rest of the syntax we don't have to be expert on, but it's no harm to know about
-
-it.
-
-So we're inserting into that table in the wrong brackets.
-
-We provide the column names in order that we want them populate.
-
-So I've taken the order that they're popular in the table branch called account number, course name,
-
-cost address and balanced values.
-
-Then in round brackets, these are the bind variables.
-
-So that first one is going to correspond to branch code, that second one is going to correspond to
-
-account number and so forth.
-
-We create the prepared statement using the Conda prepare statement passing in the school again.
-
-Now we need to populate those blind variables using the prepared statement set string method.
-
-Remember the columns, the buying variables all start at one.
-
-So that has to be the branch code.
-
-That's why I'm using that branch called there to populate that first line variable to correspond with
-
-the branch code.
-
-The second one is the account number.
-
-That's that second line variable.
-
-Therefore, that needs to be the get account number for number two.
-
-There are all set strings except for the set double because that's decimal in the database.
-
-And over here I've got the API set boolean as a parameter index and boolean.
-
-Set double as we saw.
-
-Set int has a parameter index with an int afterwards.
-
-Set long parameter index with a long and set object parameter index.
-
-With the object we then execute update because we're making a change to the database that's going to
-
-populate back one.
-
-Hopefully to say we inserted one rule and then we come back and we return that.
-
-Let's run that added one record.
-
-Okay.
-
-Let's check our database.
-
-And then you can see the new record is inserted.
-
-The last one I want to look at is an update.
-
-First thing I'll do is reset my database table.
-
-There you can see three records in the table.
-
-And then we want to look at update.
-
-So what I'm doing an update is I'm getting the details for one, two, three, four, five, six.
-
-That's the branch code.
-
-And one, two, three, four, five, six, seven, eight is the account number.
-
-So I'll output the bank account beforehand.
-
-Then I will change the bank account name to J blogs and the cost address to London.
-
-What is it at the moment?
-
-Joe Bloggs in Athlone.
-
-So then I'm calling on line 79, the update bank account passing down the bank account with the customer
-
-name J blogs and the course address.
-
-London.
-
-If the role is equivalent to one, I'm going to output that.
-
-It worked okay.
-
-And I'm going to go and get the details of that bank account afterwards.
-
-So let's look at the update bank account.
-
-So there is the scale.
-
-Any time you're updating, it's an update.
-
-Nice and easy to remember that one.
-
-What table?
-
-Bank table.
-
-And they're going to set the cost name equal to that by and variable, the cost address to that point
-
-variable and the balance to that fine variable where the branch code is equivalent to that fine variable
-
-and the account number is equivalent to that by and variable.
-
-That's because in this table, the branch code and the account number together are the comps at key.
-
-Get the prepared statement using the conduct prepared statement passing in the esky.
-
-Well then I'm going to set the bind variables using set string and set double respectively set string
-
-because that's a voucher.
-
-That's also a voucher in the database cost address, that's a decimal.
-
-So we use that double for number three and get branch code is going to be used to populate that fine
-
-variable, which is number four.
-
-And then number five, which is the account number is get account number.
-
-Again, we use execute update and that will return back the number of roles that were affected.
-
-This should come back with one and we should see a change to that particular record in the database.
-
-Let's run it.
-
-And before update you can see that it was job logs and his address was at Lorne.
-
-Now it's J blogs and it's London.
-
-Let's just quickly checked out here.
-
-And there you can see the course name.
-
-And of course, the address were changed successfully.
-
-Callable statements.
-
-Rather than have you rescue well as prepared statements inside your Java code, which must then be sent
-
-across the network.
-
-We can have our rescue URL stored on the database in stored procedures.
-
-This can be beneficial if you have many large complex queries as it can reduce network traffic.
-
-We use callable statements when we working with stored procedures.
-
-We do not need to be able to read or write stored procedures for the purposes of the exam, but we must
-
-know how to call them or execute them.
-
-In addition to having no parameters, a stored procedure can specify the following parameters in for
-
-an input parameter out for an output parameter and enables a parameter that serves for both input and
-
-output.
-
-We're going to look at each of those in code.
-
-Now let's start by looking at a store procedure that has no parameters.
-
-As stored procedure, syntax is not on the exam.
-
-I haven't written any.
-
-However, I think it is helpful to understand the header part of the procedure from the point of view
-
-of what we're doing with the callable statements.
-
-So I've included a create procedure comment in each of these methods to help in the understanding of
-
-the callable statement.
-
-Note that the database stored procedure would say something like create procedure and then the name
-
-of the procedure with wrong brackets and nothing inside there.
-
-So in line 32, I'm defining how to call this particular stored procedure.
-
-You use curly brackets at either end, and then you say call and then you specify the name of the stored
-
-procedure.
-
-Just have our own brackets because there are no parameters I'm going to use.
-
-Try with resources here to tidy up the resources that are open and note the prepared statement.
-
-Syntax is there just for a comparison.
-
-To create the callable statement which we are going to need now.
-
-We use the connection object again, but this time we use prepare call as opposed to prepare statement
-
-we need to pass in the school.
-
-And in this instance we're going to use execute query because we're going to get back a result set.
-
-This particular stored procedure you can imagine is going to come back with all of the customers that
-
-have Dublin as their address.
-
-The wild statement on line 38 is the same as before and the exception again needs to be catered for.
-
-So we need to look at here is the callable step and is created by using the prepare call method.
-
-No on the connection object.
-
-And in this case we're going to use the execute query because we want to get back a result set.
-
-Let's specify an in parameter.
-
-So my skill is to call read addresses.
-
-That's the name of the store procedure this time I've got a question here.
-
-This should be familiar enough from the bind parameters that we were looking at before with prepared
-
-statements, the database would say something like Create the procedure, read addresses and there is
-
-the end and it's calling it address and it's specifying it as voucher 50.
-
-That was the size of my cost address at the very start of our char 50.
-
-So in this case, the store procedure you can imagine is going to take in some address and return back
-
-all of the customers that have that address.
-
-Again we use the connection object prepare called passing in the school and we get back our call of
-
-the step and putting it in the tray with resources so that it will be closed when finished.
-
-I now need to do a set string.
-
-So the one there corresponds to the question mark that's to go in and they're going to pass in Dublin.
-
-So in this case, I want back all the customers whose address is Dublin.
-
-The prepared statement could do that.
-
-Also the set string with a one.
-
-What the next one which is coming just 952 the C I start search string where you can pass in the name
-
-of the parameter address the callable step and can do that for the prepared statement cannot do that.
-
-And the name address is coming from the parameter name on the stored procedure.
-
-Again, we use execute query.
-
-To get back a result set and we use the wild artist on next to go through that particular result set.
-
-Note that I've nested the try with resources calls because I needed to do a set string in between if
-
-I specifying an hour from now you'll see I've got a question mark equals at the start of the string
-
-to call the store procedure.
-
-That is optional.
-
-But you can see I've got my question mark again, representing the output on the database, you would
-
-have something like create procedure.
-
-There is the name of the store procedure and then there's the out there is the name of the parameter
-
-and it's of type int on the database side.
-
-Again we use the prepare call to get callable statement.
-
-Line 69 is important this register out parameter and that's number one there represents that question
-
-mark and we're saying it's an integer.
-
-We need that register as a parameter for every out parameter that we have and every in out parameter
-
-that we have.
-
-We haven't looked at in out yet.
-
-We'll look at that next.
-
-We then execute it.
-
-Now in this case, it's execute as opposed to execute query because there's no results set coming back
-
-this time.
-
-And then I can use to see us start get it for count.
-
-And again, that relationship between count is what's on line 66.
-
-I need the register o parameter online 69 in order to be able to do the get it online 71.
-
-And lastly, let's look at the in out the string.
-
-There is two called square number.
-
-And that question mark represents both the in and the out parameter.
-
-On the database side of things, you have create procedure, the name of the procedure and then it's
-
-in out there is the name of the parameter and it's of type int.
-
-Again prepare call on the connection object to get the call with statement.
-
-We will now set it that one represents the input parameter going in the in part of the input and we're
-
-giving it the value five now because we have an out aspect we need on line 84 a register of parameter.
-
-Again, it's on the same question mark because there's only one and it's of type integer.
-
-We then execute us and now I can do the call of the statement, get int for number, and that's why
-
-I include the create procedure syntax online so that you can see where am I getting number from?
-
-Resource leaks, database resources are expensive to create, so we have to make sure that we close
-
-them off properly.
-
-To try with resources is very helpful here as it will automatically close off resources for us.
-
-We need to keep in mind that the order of closing off the resources is important.
-
-The results.
-
-That will be the first thing we need to close off.
-
-Followed by the prepared statement or call of a statement.
-
-Followed by the connection.
-
-To try out resources, closes resources automatically in the reverse order from which they were initialized
-
-and acquired is common straight from the Java language specification.
-
-If you look at a piece of code here.
-
-The resource, the statement, the connection object is the first object that's initialized.
-
-Then the prepared statement.
-
-Then the result set.
-
-They will be closed off in the order of results at first.
-
-Prepared statement.
-
-Second connection.
-
-Third.
-
-That is the order that we want.
-
-So the trade resources is very useful for that purpose.
-
 In this section.
 
-We're going to look at Iowa and New York to.
+Now we're going to look at annotations.
 
-This stand has taken on the jive 11 100819 topics.
+According to the 819 exam, you to create, apply and process annotations.
 
-So we're going to read and write the console and file data using IO streams in this particular section.
+Let's talk about metadata first.
 
-IO is the first bit.
+What is metadata?
 
-The first section relates to Java IO package and it's called Java IO fundamentals.
+Well, metadata is information about information.
 
-The second section relates to that North Star Packages and is called New Order to New Order two relates
+If you think of the rows and columns in a database table, the rules give you information.
 
-to the key features introduced in Java seven, which reside in two packages New Order file and neo dot
+The data might be Shawn Kennedy.
 
-attributes.
+Well, the column name will be metadata about that data.
 
-Java IO Fundamentals.
+The column name might be name.
 
-Java reads and writes characters or bytes classes with stream in their name, reads and writes binary
+So that name tells you that the data, Sean Kennedy is a name.
 
-data.
+Annotations via metadata enable us to add value to our code.
 
-For example file input stream file output stream object input stream and object output stream.
+We can annotate or assign metadata to classes, methods, variables, etc. although they are optional.
 
-Typically, you're looking at images or executable files in this case.
+When you use annotations, you must use them correctly.
 
-Readers and writers are used to read and write text.
+Annotations operate much like interfaces.
 
-Classes such as file reader, buffered reader, file writer, buffered writer and print writer.
+In fact, their origins are in interfaces.
 
-And here we're talking about creating or reading text funds which contain character or string data.
+There are elements that look like abstract methods.
 
-File is the class that enables you to create objects from which you can then create actual physical
+This will be clear when we look at examples, particularly when we go to create our own custom annotations.
 
-files on the hard disk.
+Annotation names are case sensitive.
 
-Many of the previous classes are intended to be wrapped.
+However, it is common practice to start the name with an upper case letter.
 
-This enables low level classes to get access to higher level functionality.
+Think about overwrite for the two string.
 
-This is used for efficiency, for example, buffering.
+That's a very common one.
 
-So this would be an outline of the classes that you'll be seeing in the code.
+And it's a capital.
 
-Examples.
+Like interfaces, annotations can be applied to unrelated classes.
 
-You've got the abstract classes down on the left hand side input stream, output stream, reader and
+So let's start looking at these in code.
 
-writer.
+So in this particular program, we're going to look at the override and the functional interface annotations.
 
-So you have the byte data, the binary data and the first two, and you have the character data and
+Annotations begin with the ash and then you have the annotation name.
 
-the second to the low level classes, then file input stream, file, output, stream, file reader
+Let's look at that over at first of all, from the point of view of a class and then we look at it from
 
-and file resources.
+the point of view of an interface person.
 
-Just prepare and file in front of the abstract class name.
+Is the class here?
 
-If you're talking with the high level classes for efficiency, the buffered ones, then all you've got
+And note that the two string is completely common to those.
 
-to do is put buffered in front of the abstract class name.
+So I'm a great class person, shall we say, in line 21 in the background compiler puts in extends object
 
-So that's buffered input stream, buffered output stream, buffered reader and buffered right here.
+like you could see on line 20.
 
-There are other high level classes available like object input stream which will be used for streaming.
+So the two string from object is in her.
 
-And there is an example on the right new object input stream wrapping a new file input stream.
+We have chosen not to override it in this case.
 
-And then there is the name of the file object output stream, print stream and there is an example of
+So when we create a new person on line 37 references, it's okay.
 
-new object output stream wrapping a new file output stream.
+And then we pass that to a system that outdoes print line that implicitly is a call to a two string
 
-Input Stream Reader is a bridge between byte streams and character streams, whereas output stream writer
+in the background.
 
-is a bridge between characters streams and byte streams going the other way.
+So let's see what it outputs.
 
-And then there are some examples there of readers.
+And you can see there it's quite on friendly.
 
-You've got you buffered reader and that's wrapping and you file reader got a new buffered reader which
+Yeah.
 
-is also wrapping and you input stream reader.
+The output.
 
-So it's very flexible like that.
+You've got the name of the package, then you've got the name of the class.
 
-And then for the writer, you've got New Bedford writer, which is wrapping and you find writer.
+Then you've got the outside.
 
-And then you've got new Buffett writer, which is rapping a new output stream writer.
+And then you've got the hashCode.
 
-Again, a very flexible system that in a system that out there they refer to the keyboard and the console
+So what we'll do is we will put in our two string.
 
-respectively.
+Now we're overwriting it where we just want to return back the instance variable, which for two strings
 
-Let's have a look at these in code.
+should do.
 
-In the reading, writing examples, I'm going to have two methods copy, text, file and copy binary
+And I've put in the override that tells any developer that we are overwriting something from the parent.
 
-file and whether or not the use buffering is dependent on the boolean that I'll pass into the method
+It also has a great hub so that if we do happen to mistyped, we will get an error.
 
-invocation.
+For example, if I put in a lowercase s instead of a capitals.
 
-For example, on 916 I will copy a text file, but false means I will not be using buffering, whereas
+Now we have a problem and the compiler will spot that because they are overwrite.
 
-online 17 I will be using buffering.
+Whereas if I didn't have the hash over it in there, it's just another method and the output would be
 
-So let's have a look at the copy text file, which starts on line 21.
+still unintelligible.
 
-I've got two files.
-
-Source and test.
-
-Now I'm using absolute addressing here.
-
-So I have to give the full path as to where this is on my windows machine.
-
-You'll note that the backslash has to be escaped, otherwise you're going to get a problem.
-
-Otherwise, if you said backslash capital you java thinks well, is this a special escape sequence?
-
-And I'll say, No, it's not.
-
-I don't recognize it.
-
-So you have to escape the backslash.
-
-So when jarvis's backslash backslash it realizes, oh, that's just the backslash.
-
-I'll leave it alone now.
-
-It'll escape it.
-
-That's going to map out.
-
-Where is that file on my hard disk.
-
-Reading.
-
-Writing examples that Java is the source one and the file name of the destination is reading writing
-
-examples too.
-
-So we're going to use the tri with resources here because it has an inbuilt clause which will flush
-
-the buffers out to the hard disk.
-
-So anything that might be kept in the buffers will be written out.
-
-That's part of the clause procedure.
-
-So we want these auto plausible to be closed and buffered.
-
-Reader and buffer driver bullet implement that.
-
-So that's fine.
-
-So I've got of our reader and of our writer and I'm using a file reader pointing at the source file
-
-and I'm wrapping it in a buffer reader and I'm using the file writer, which is looking at the dest
-
-file.
-
-It is wrapped in a buffer writer for efficiency.
-
-Again, unlike 29, if I am buffering.
-
-The key here is that in line 33.
-
-Buffered reader has a read line.
-
-That is specific to Buffett Reader.
-
-It's going to reading the whole line in one go rather than reading it in one bite at a time.
-
-It reads in the whole line.
-
-Now it does strip out the end of line character, so we will have to cater for that.
-
-Oh 931 I declare a string as TR and I set it to note while this SDR, which is assigned the result of
-
-the reader diary line, while it's not equal to null, so null is the return value from buffered reader
-
-read line to say okay, I've got to the end of the stream, or in this case the end of the file.
-
-That's the end.
-
-Don't go reading any more.
-
-Read in a read line into SDR and then we'll use the right to output it to the destination, which is
-
-the writer w TR And then I'm going to put in the new line at the end because as I said earlier, the
-
-read line strips out the end of line character.
-
-So we need to put that in so that when we look at the destination file, it won't all just be one horizontal
-
-line of text.
-
-It'll all have just as you see it here, there's carriage returns or new lines put in at the end of
-
-each line, so you can read it very easily.
-
-The else on line 37, it's if we are not doing any buffering, what does that mean?
-
-We're going to read in one bite at a time.
-
-It is an int as opposed to a base because Java wants to use minus one to signal the end of stream.
-
-That's what they decided put in minus one as the end of the stream.
-
-So minus one.
-
-While it is a valid byte value the actual characters that you could be reading in.
-
-If you look at the ASCII table at the start of the Unicode, all of those bytes, none of them are negative.
-
-They're all zero upwards.
-
-So minus one is very specific to being the end of the stream, end of the file.
-
-So it's B while B which is assigned the reader that read is not equal to minus one.
-
-So I read an invalid byte.
-
-Then I'll write out that byte to the w tr which is the writer representing our file writer.
-
-So that is the copying of the text file.
-
-So let's go up here into man and we will run that.
-
-So in this case, I have buffering turned off and I'll run it.
-
-Okay.
-
-So we're looking for the Java file and there you can see there it is after being created and it has
-
-the end of line characters in it.
-
-So I'll delete that.
-
-And now let's go back and run it again.
-
-This time we will run with buffering.
-
-Now, from our perspective, it'll look just the exact same and just recreate the file.
-
-It's just more efficient.
-
-And there you can see it has been recreations again.
-
-Now let's turn our attention to the binary.
-
-So we're going to copy a Java class file.
-
-Copy the binary file which is down here.
-
-And again, the boolean is for buffering.
-
-Now I'm making one or two changes just to various a little bit.
-
-The first change of making is that I'm going to use the forward slash instead of the backslash.
-
-Now this means I do not have to escape it.
-
-You do have to skip the backslash, but you do not have to escape the forward slash.
-
-And the second change is that I'm going to use a relative path instead of an absolute path.
-
-So you'll see the dot, for example, being used there that indicates the current directory in order
-
-to know the current directory.
-
-I'm not putting the working directory using the system.
-
-Don't get property passing in user doctor.
-
-Then I've got a source in the destination I'm using relative addressing here now.
-
-So when you realize what my current working directory is, it means projects Udemy.
-
-Then you can see here that the data represents the current directory online.
-
-53 Then we go to target classes, let's get certified IO reading rating example start class.
-
-That's the source.
-
-So the classes and then we build on the package name.
-
-Let's get certified which is my YouTube channel forward slash your reading right example start class.
-
-Then I've got a destination file which is just going to be reading ratings outputs to that class.
-
-Again, I'm going to use try with resources here so that it has the auto clause in for me and I'm using
-
-a file input stream wrapped by a buffered input stream and a file output string wrapped by a buffered
-
-output stream.
-
-And the file input stream is wrapping the source file and the file output stream is wrapping the destination
-
-file.
-
-Now if it's buffering.
-
-Then I'm going to create a buffer of one or two for the kilobytes, the number of bytes read.
-
-Well, we'll see what we use that in a minute.
-
-Now that int while the number of bytes read which is assigned the input read, passing the data into
-
-the buffer is greater than zero.
-
-So while I read in something into the buffer and what we want to do, we're going to do an outer right
-
-of the buffer starting at index zero and the number of bytes that we have read and we're going to flush
-
-that out to the hard disk.
-
-So in other words, it keeps it in a buffer.
-
-We want to flush it out to the hardest just in case the program will crash and the buffer data would
-
-not be written out to the file.
-
-What we're doing here with the number by thread is basically, as I say in the comment on line 64,
-
-as the file is unlikely to be an exact multiple of one or two four bytes, the number of bytes read
-
-helps us to write out exactly the number of extra bytes above that multiple.
-
-So let's say the file is two or five eight bytes in size.
-
-Well, we'll go around the first time, one or two four and write that a second time.
-
-One or two for.
-
-Okay.
-
-That's two or four days.
-
-So then the last time it'll be just ten bytes is what will write ups.
-
-That's what that's about.
-
-Rather than write out one or two, four plus one or two, four plus one or two four.
-
-So the ls then online 71.
-
-Well, we're not doing the buffering here.
-
-Similar idea reading in one bite at a time.
-
-Again, the interviews for minus want to signal that we've reached the end of the stream.
-
-So let's run that.
-
-Copy the binary file.
-
-And I'm turning off buffering initially.
-
-Classes directory.
-
-There you can see.
-
-There it is.
-
-So I'll delete it and I'll go back in here.
-
-And I wrote it again this time and have boyfriend turned on.
-
-Again, this is just for efficiency.
-
-Underneath with the operating system, from our perspective, we'll see a file being created both times
-
-and there it is created again when I want to have a look at the console class, which is specifically
-
-designed for interacting with the user.
-
-It is a singleton where you use a factory method to create the one and only one instance.
-
-The constructors are all private, thus you never knew the console.
-
-If you see that it's a compiler error straight away.
-
-Let's have a look at the console in code and we'll examine some methods that are popular with it.
-
-There you can see on line it.
-
-I'm creating the console by using the system console command.
-
-Note that it's not new.
-
-If the console is equivalent to null, you have to check that because often ideas will grab the council
-
-and they won't give it up.
-
-So we're going to test this program from the command line.
-
-You know put system that our is to the error console which is essentially going to be the screen that
-
-will say console not available.
-
-Otherwise we can say console that read line and you can pass in a string which is formatted.
-
-So you can see there is a percent s and then name is the string that will be plugged in there.
-
-So you're saying plug the string name in there where a percent s appears.
-
-So that will read in a line as well into the name.
-
-So it's a prompt.
-
-So someone at the console types in their name and hits return and then the string name is populated
-
-on line 12.
-
-Line 13, you've got the farmer's method.
-
-Hello there.
-
-And presenters will refer to whatever is in that name variable which is a string.
-
-Percent as means is string present and means puts in the carriage return or a new line afterwards.
-
-So if I type in Sean online 12, it'll come up with Hello there, Shawn.
-
-Line 14 is the print method where I'm passing in the welcome as a string.
-
-Now I could pass in other arguments after that, but it's a virus, so zero is actually valid.
-
-Console.
-
-The writer will give us back the writer and I can open a blank line by saying console that writer does
-
-print Alan.
-
-A popular one for the console is the reed password.
-
-Now this always returns a character.
-
-It does not return a string because that would mean the string.
-
-Your password, in other words, could hang around in the string pool and a hacker could get out.
-
-That does not happen in the character array.
-
-So what can I pass into the reed password where you can see a string and again there's placeholders
-
-the percent as they're twice and I'm passing in four and ten.
-
-So four went to the first one and ten we're going to the second one.
-
-So you get a prompt.
-
-Enter the password between four and ten characters.
-
-Let's call the read password a second time.
-
-Passing in verified password.
-
-There's no need for any arguments other than that.
-
-And now what we'll do is we'll check to see are the equal using.
-
-The arrays are equal.
-
-So what's the password and password again are the equal come back with a boolean and if it's true then
-
-we'll output to the console using the print of the passwords match.
-
-Otherwise we'll output at the passwords do not match.
-
-So I'm going to run this from the command line.
-
-So you can see here in the black rectangle, I'm invoking the JVM.
-
-So it's java space.
-
-I fancy P is to say, okay, I'm changing the class path where I'm going to use this class path.
-
-Now this is the top of the package hierarchy that I am providing next.
-
-You can also put in semicolons and elongate as is, make it longer to put in jar files and so on.
-
-But for this particular run, I want that to be the class pad, because what will happen is the second
-
-part of this is that the file name?
-
-This is where you have to specify the package name.
-
-Which is part of the actual type.
-
-So if you don't do that, it's not going to find it here.
-
-So if you look at point three.
-
-The JVM essentially just pulls them together and says, okay, it's going to start looking at the target
-
-classes.
-
-That's what's going to start working from and then it's going to build up.
-
-Let's get certified that I'll that console test onto that.
-
-So I'll build that directory structure onto it because that's what let's get certified that I oh that's
-
-the package name and it works from there.
-
-So let's look at it from the command line then.
-
-So here you can see I'm just about to hit return.
-
-That's the.
-
-Texts that you saw on the word document.
-
-Please enter your name.
-
-John.
-
-Hello there, Sean.
-
-Welcome.
-
-And to the password between four and ten.
-
-A.
-
-B.
-
-C.
-
-D.
-
-E.
-
-F.
-
-Verify it.
-
-A.
-
-B.
-
-C.
-
-D.
-
-E.
-
-F.
-
-And the passwords match.
-
-I run it again.
-
-A.
-
-B.
-
-C.
-
-D.
-
-E.
-
-F.
-
-Palo Alto IP LP.
-
-The passwords do not match.
-
-So the password is very useful.
-
-Just an echo as you type in and stored in a character array and don't ever knew the console.
-
-It's a singleton where you system console to create all the constructors of private.
-
-Now that we've dealt with the legacy failure now let's look at and I neo dust two and I order two is
-
-a more powerful API than the legacy Java that I oh that file class.
-
-The path interface is central to neo to know if that path objects are immutable.
-
-If the path interface this interface replaces file as the representation of a file or a directory,
-
-it is a lot more powerful than file.
-
-You know, the parts class.
-
-This is a utility class which contains static methods to create path objects.
-
-These objects implement the path interface.
-
-You've also got the files utility class, which contains static methods for working with path objects.
-
-In other words, these methods take path objects as parameters.
-
-Let's have a look at these in practice.
-
-You can see a nice three and four, the two inputs that I need to have now that follow that path and
-
-dot parts in the main method I'm just outputting on like nine.
-
-What is my current working directory?
-
-By using the system, don't get property passing in user dir.
-
-This is a windows machine and you can see there that its netbeans projects forward slash Udemy.
-
-In Java 11.
-
-You've got a path that all of this is a new way of creating a path object.
-
-The more traditional way on line 22 would be to use the path start catch.
-
-So I'll be mixing them up as I go along to expose you to both styles.
-
-Let's look at lines 12 to 14.
-
-I'm creating three path objects therapy.
-
-One, two, three.
-
-The first one is using a relative path and I'm using the forward slash.
-
-That's okay.
-
-The forward slash does not need to be escaped.
-
-However, online 13.
-
-You see that?
-
-I'm using the backslash.
-
-The backslash does need to be escaped, otherwise you get a compiler or it'll be treated as an escape
-
-sequence.
-
-So let's look at it.
-
-We actually do want to treat it as an escape sequence.
-
-Backslash.
-
-Backslash is an escape sequence that maps to that in the background.
-
-Obviously, we've got a problem now because backslash l is not a valid escape sequence.
-
-If I were to replace that with backslash n or backslash t, you'd see the job is not going to complain
-
-because it knows that these two characters together form a valid escape sequence.
-
-We want the backslash to be left alone, so we have to escape it.
-
-So in other words, talk or treating backslash g as an escape sequence.
-
-Treaties do together.
-
-That is a valid escape sequence which maps to the backslash.
-
-So the second part there that we're looking at on line 13 is, in fact, an absolute path on Windows.
-
-You've got to see column backslash root.
-
-And then on line 14, we've got an absolute path on Linux or a mac.
-
-We've got the backslash at the very start of the string.
-
-Line 12.
-
-It's a relative path because there is no backslash at the start of that string.
-
-So that's considered relative to the current directory that we are in, which would be Udemy.
-
-Now these are all logical paths.
-
-These files do not have to exist on the hard disk for the path object to be created successfully or
-
-not.
-
-We'll see that in the next example.
-
-Lines 17 to 19 are the exact same as lines 12 to 14.
-
-Except now we're using the var Arabs version passed out of the overloaded to take in a virus.
-
-So rather than put it in as one string as on line 12, we're putting in as a var args on line 17 and
-
-GC is the first string and logo that PNG and Java will build.
-
-The string that you see on line 12.
-
-As a result from that.
-
-Line 18.
-
-You've got the C column as the root.
-
-And Java would build the string that you see on line 13.
-
-It'll build that from what you're passing in in virus online 18 and then like 19 is the equivalent of
-
-line 40.
-
-Now let's look at the older style, the pat start gas.
-
-That is the exact same equivalent.
-
-What you see on lines 22, 24 is the same as what is being created online at 12 to 14.
-
-The relative Pats is the first one.
-
-Then there's an absolute pattern Windows and then there's another path in Linux and Mac.
-
-This is using the path that gas as opposed to the path of.
-
-And then we're using the parts that get again using the var args.
-
-So lines 12 to 14 is a path sort of version.
-
-Lines 22 to 24 is the path start get equivalent.
-
-Lines 17 to 19 is using the advanced path thereof.
-
-And then lines 27 to 29 is the past start guess using virus equivalent of that if I run that.
-
-I get no errors there, even though those files do not exist.
-
-Let's look at some path operations.
-
-I'm going to invoke path in for passing down a particular path.
-
-Now, this particular file does exist to palm that x amount.
-
-Again, I have to escape the backslash so there don't get any compiler in my strength and I'm using
-
-path shortcut to create a pat on line nine.
-
-So 913 I called the two string that just outputs the two string.
-
-I've got a commentary representing the execution of this method.
-
-From line nine.
-
-There is a guest name count that counts up the number of name elements.
-
-Note that Rouge is not a name element and we'll see that in line 22 because I get an exception.
-
-If I call, pass that off with the backslash and then I'll get name zero.
-
-So we'll output all of the name albums as a get named count to tell us how many name elements, and
-
-then there's a get name with a valid index for that.
-
-So users is zero as Kennedy is one, documents is two, NetBeans Project is three, utomi is four and
-
-Honda recommends five 0 to 5 is six name elements.
-
-July 19.
-
-Get the file name that gives you the file name at the very end.
-
-Be it a directory or be as a file member.
-
-Directory is a file.
-
-So that is the last part of the path that's coming in.
-
-Get parent gives you everything except the file them.
-
-So I've got second backslash users as Kennedy documents NetBeans projects you dummy get root in line
-
-21 is sequel on vaccination.
-
-There you can see the path that of online to where to get them zero.
-
-I'll try that in a second.
-
-Forcing the league an arrogant exception.
-
-In other words, get them zero if you're only passing in the route as your path is an exception.
-
-Lines 24 to 26 demonstrate the subpar parts.
-
-This gives you some parts of the path.
-
-Now the way to look at this part is how many elements do we want?
-
-Of the subplot.
-
-You take the second index and you subtract the first one.
-
-So we want three -0 elements.
-
-What index are we starting with?
-
-Index zero.
-
-So take three elements starting from index zero.
-
-That's users as Kennedy.
-
-And again, we're not start with the root.
-
-This is start with index zero, which is users.
-
-Line 25 we want four minus one elements starting it index one.
-
-So that's as Kennedy documents napkins projects then line 26.
-
-We want three minus two elements, which is one element what index we starkness index to.
-
-So that's documents.
-
-Is it an absolute path?
-
-Yes, it is.
-
-Because we're starting with see call backslash.
-
-So let's run that one.
-
-So there's the two string of the pet get name count is six users as Kennedy documents is three, NetBeans
-
-projects is four, Udemy is five and Palm the next email is six.
-
-Get them zero is users one as Kennedy two documents, three napkins projects for you, Demi and five
-
-as part of X amount.
-
-The file name is Palm that x amount and the get parent is everything bought from that x amount get root
-
-sequel backslash two So pat zero come at three.
-
-We want three elements starting at index zero that's users as Kennedy documents so pat one come a four
-
-we want four minus one which is three elements starting at index one that's as Kennedy documents NetBeans
-
-projects and then so path to come three we want three minus two elements, which is one element starting
-
-an index, two, which is just documents.
-
-Is it an absolute path?
-
-Yes, it is.
-
-Because we're starting with C column backslash.
-
-Let's go back and forth that exception.
-
-So if I say okay.
-
-We want to see.
-
-Can we get the name?
-
-Of zero that prompt there is so passed it of creates a valid path is just got the root but getting him
-
-zero is an illegal argument exception.
-
-Let's run that.
-
-And there you can see a legal argument.
-
-Exception brings us to that line there.
-
-So that is an exception.
-
-Now, let's run it with a relative, Pat.
-
-And this directory structure does not exist.
-
-ABC d e f g h i j k l.
+So let's put in the correct method.
 
 And let's run it.
 
-So there's the twisting of the path.
+And now we should get Sean Kennedy, you know, push because the over too strong is now being called.
 
-ABC slash ATF slash GJ slashed.
+That's from the point of view of the class.
 
-You can know it at the backslash.
+What about from the point of view of an interface?
 
-Backslash has been translated to just one single backslash.
+This is point two.
 
-That sort escaping it does get name count as four.
+Well, let's have it working.
 
-That's correct.
+The interface has a move method online 18 and we've got a move method using the add overwrite again
 
-Zero is ABC want the F to g h i and get them three is your care.
+to highlight that we're overwriting the method and it's move and we're just up and moving in line 32
 
-Now you're going straight to the start here for zero because there is no roost in this particular two
+and then on line 39 recalling that.
 
-relative path name.
+So we should just get moving as part of the output because on 921, we're saying that the class person
 
-That's why is absolute is false at the end.
+implements that interface.
 
-Okay.
+And there you can see moving his output.
 
-It's not an absolute address.
+The third thing I want to look at here in this particular program is the functional interface.
 
-It's a relative address to get file name is the last one, be it a directory or a farnum j k l could
+Again, the assignment precedes it and then the name of the annotation.
 
-be either it parents everything both that.
+A functional interface follows the single abstract method and same rule if one abstract method only
 
-So it's a b c d e f g h I get Ruth comes back with null in a relative pad.
+allowed.
 
-So pad zero come in three is abcdefghi1 come four is d f g h i j care and to come in three is give us
+So for example, if I tried to go over in a second one.
 
-one element.
+Now you get an error or as if you didn't annotate with the ADD function interface, it wouldn't spot
 
-Start starting good index 2012.
+that.
 
-That's G hedge i.
+So I've put in a second one.
 
-Let's look at some more path operations that we can form here.
+That's a problem.
 
-We're going to do copying, deleting and moving.
+So what we need to realize here now is methods from object are not counters.
 
-So my current directory is the Udemy one.
+So even though I have a second abstract method there, the equals method that does not count because
 
-I'm creating three path objects.
+between line 21, which is what you typically type in and then 20 is what you will get when the compiler
 
-They're on lines 14 to 16.
+is finished.
 
-Know that these are just creating logical paths.
+Object methods are in Hirsch's.
 
-These are just objects.
+So the equals implementation will be in hers.
 
-There is nothing created on 914 to 16 on the hard disk.
+So therefore that's not counted.
 
-The line 14 is near or to forward slash.
+That doesn't matter.
 
-Source text GAN Because it's not a backslash.
+That equals method.
 
-I don't need to escape it.
+So that's a proper functional interface move, but it has only one abstract method that is the method
 
-Line 15 is an iota for such target that text and line 16 is now too forward slash target to text.
+move on line 16.
 
-Line 18.
+In this particular program.
 
-I'm going to use the files that create directories passing in the path that's returned from parts that
+I want to look at the deprecated suppress warnings and see if there are of annotations.
 
-get near to my.
+I've got a class book there with three static methods and there's no annotations whatsoever been used
 
-That is a relative directory that'll be created.
+initially.
 
-Create directories allows you to create a directory and any subdirectories that may be required.
+In main, I'm calling two instance methods and these methods are calling book methods, static book
 
-So it's very useful like that.
+methods.
 
-There is a files that create directory as well, but files that create directories will create all subdirectories
+So let's see.
 
-underneath that.
+When I compile that, I'm going to compile using the Java Sea.
 
-If I were to pass in for example.
+So let's go to the command line to invoke Java Sea.
 
-That type of structure.
+And I've got no worries there.
 
-It would do that.
+So let's go back to the editor.
 
-Nyota is not on the hard disk at this moment, so that will create that online waiting on the hard disk.
+The first thing I want to do is go into the class book and deprecate the print method on line 25.
 
-919 fires that exist source at the moment that is going to come back with false so we're using the fires
+Essentially, we're finished with this print method for books.
 
-that exist to see is there a file in near to the subdirectory that relative subdirectory after you Demi
+You should be reading the material online.
 
-called source that text there isn't.
+That's essentially what we're saying.
 
-So we'll get out to the LS which is a 927 create file files dot create file passing in that source path.
+Now you should put in a Java document when you're going to deprecated method.
 
-Now that would create a file on the hard disk it will be empty line.
+Note that in Java DUC deprecation is all lowercase, whereas the annotation itself.
 
-20 years is a fuzzy copy to copy the source to the target.
+Is Capital letter.
 
-Now with two files we have a source and we have a target file, both of which are empty.
+You lead off with a capital letter, the very first letter.
 
-929 is files that move targets to target two.
+The annotation.
 
-That's like a rename.
+But in Java Dock it's all lowercase.
 
-Now we have the source and target two files and then we go to go files.
+Now there are two elements or properties that you can define with the deprecated annotation.
 
-Delete Target two.
+One is since and the other is for removal.
 
-Now we've only got the source file left.
+So this is deprecated since version 2.0.
 
-So this is an example of the various methods that are available to you.
+And is it far removed completely in the future?
 
-So let's run it.
+True.
 
-So we should have an now or two subdirectory off your Debian inside there a source text.
+Means yes.
 
-Let's check that there is the now or two and there is the source text.
+That is the case.
 
-Let's go back and rerun it this time.
+You can see that the editor puts a dash through the print method to indicate that this is.
 
-The established line 19 will be true because the files that exist will come back saying Oh yeah, there
+A method that is deprecated.
 
-is a subdirectory now or two and there is a source that text file in there.
+If you looked up the API and you looked at the Integer constructor, for example, you'll see that that
 
-Now a copy here.
+is now deprecated in favor of using the value of method.
 
-I'm going to use the files that copy north on line 2020 122.
+The static method integer dot value was because that refers to a pool of integers, so that should save
 
-I've put in a comment here with regard to the fact that if the source of the target which I'm doing
+memory.
 
-on 922, if there were directories, they're not.
+So the test deprecated call and 932 refers to the method online 30 years where there is a call to poke
 
-But if they were, then this will be a shallow copy.
+dot print.
 
-What does that mean?
+That's the deprecated method.
 
-It means that the files and subdirectories within the source directory would not be copied.
+And what we want to see is what is the compiler warning that we would get.
 
-We will perform a deep copy where the whole tree is copied, will use streams for that and we'll do
+Let's have a look at that on the command line.
 
-that in the example later.
+Now you can see that the print method in book has been deprecated and marked for removal.
 
-Slide 23 Files A copy source to target.
+Let's go back to the editor.
 
-I'm passing in a standard copy option replace existing.
+So it's not interfering with the running of it.
 
-So if the file the target is already existing then it will not throw an exception.
+There is just a warning there that we should be using the read on line, essentially, but it is a deprecated
 
-It'll overwrite.
+method.
 
-If it already exists, it'll over rice or otherwise.
+Now to suppress warnings is a way of saying, I don't want the warning.
 
-If I left off that standard copy option to replace existing, I would get an exception faster moving
+So on 937, I can say, okay, at suppress warnings and put in deprecation.
 
-in 24, then moves to target again.
+That's what you need to stop the deprecation warning message.
 
-It's a rename to Target two.
+However, when I've tested this and I'm sure you know, it still comes up.
 
-So now what we'll have is the source and target two files when we run.
+I've had a look at this online and I've seen several questions about that up on StackOverflow, where
 
-And with no exception.
+it looks like it's a compiler issue that just hasn't been resolved.
 
-And now there you can see there is the source and target two files in the subdirectory now or two of
+So I'll go on and demonstrate.
 
-Udemy, which is the current working directory resolving a path to concatenate two path objects.
+I'm talking about there.
 
-Together we will use the resolve method.
+I saved the code before I came here to the Java Sea.
 
-So you need to remember when you concatenating you use the resolve method.
+The command line.
 
-So resolve concatenate.
+And you can see I'm still getting that particular warning, even though I've asked for the suppressed
 
-You can remember with the RC.
+warnings to not show me that particular warning message.
 
-Randy Crawford resolve to be certified Roman Catholic, whatever way you can remember that.
+Let's go back to the court again.
 
-Resolve is concatenation.
+The other suppress warning is for unchecked warnings.
 
-So you would say a path wound up resolved and you pass in path to.
+They're basically warnings to do with raw types.
 
-That means that you've got to concatenate path to onto path one or more correctly speaking, we are
+So you can see on line 43, I'm passing in New ArrayList and I'm using the type inference diamond operation.
 
-resolving path to within path one.
+However.
 
-Resolve does not check whether the paths exist on the hard disk.
+This particular line was not give me any warning if I were to use a raw type.
 
-Essentially you're just working with strings and if an absolute path is passed in, then that path,
+In other words, new ArrayList round bracket.
 
-the absolute path, is simply returned.
+That's a raw type.
 
-Let's have a look at some examples in code to further explain this.
+That is a call to book that preview book.
 
-So lines 8 to 10, I have three different path objects.
+That preview is taking in a list of string reference called Pages and Returning Pages that size.
 
-I'm using paths that get a path sort of to create these.
+Now we've got a raw type, so that's going to give us an on checked warning.
 
-I've got an absolute 19899, I've got a relative one and I've got an actual file on line ten.
+Let's force that are first of all, so that we can see it.
 
-Line 12 and 13 is an absolute start resolved relative.
+So I've got Java Sea for that.
 
-So we are essentially just depending on the relative path onto that absolute one.
+And now you can see Javert uses unchecked or on safe operations.
 
-So the absolute path is all the way up to Udemy.
+So let's go back to the editor and suppress that warning.
 
-And then we append on Neo two, which is the relative one lines, 14 and 15.
+So on line 41.
 
-We are resolving the file path within the absolute one.
+I will say suppress warnings on this particular method test on checked.
 
-So essentially we just depend on the file onto the absolute so named.
+So the unchecked is the particular warning that I want to suppress from this particular method.
 
-A text goes on to the sequel users as kind of Kennedy documents NetBeans projects Udemy.
+So in other words, ignore warnings related to the use of raw types.
 
-What if we resolve the file path within the relative path?
+Let me save it and go and recompile it.
 
-Well, you get now two backslash name dot text, you append on the file path, which is named a text
+And now you can see that the warning about the raw types, the unchecked or unsafe operations that has
 
-onto the other of one, which is now two and Java puts in the backslash between them.
+now gone.
 
-Lines 19 to 25.
+Let's go back to the editor.
 
-You are resolving an absolute path within anything that just returns the absolute path.
+And the last sanitation I want to look at in this particular program is the Save Our Eggs, which you
 
-So lines 2021, we are resolving the absolute path within the relative path that just gives you back
+put in front of a method to say that the drugs that are coming in, you will behave properly with them.
 
-the absolute path.
+Now, this particular example doesn't do that.
 
-Any time you're passing in an absolute path as the parameter, as the argument, you just get back the
+That's why I called the method abuse via our drugs, because we're taking in a list of integer as the
 
-absolute path.
+var args parameter.
 
-Same happens with lines 22, 23.
+We're making an object array refer to that list of integer.
 
-We're trying to resolve the absolute path within a five.
+Then the first index zero is made to point to a string, a list of string, and then the list zero dot
 
-Absolute path is just returned.
+gets zero is going to give us a class cast exception because we're trying to go from a string to an
 
-And then lines 24, 25.
+integer because the return type is an int.
 
-We're passing the absolute path again to the resolve, which means we just get back the absolute path.
+There are some rules around it that we just want to discuss.
 
-It doesn't matter what is the type of path that we are executing resolve on.
+You must have args for a start.
 
-Once the argument going in is an absolute path, that's all you get back.
+So if I try to get rid of the dot, dot, dot.
 
-Lines 20 years to 33.
+I get in her?
 
-More interesting.
+Now I'm calling from a static context.
 
-Here I create two different parts.
+So the method must be static in all these cases.
 
-One looks like a directory and the other looks like a file.
+However, it must be private, static or final.
 
-However, that dir could in fact be a file.
+So I'll just take out that call there because that's making it.
 
-An escaped text on line 29.
+Static, then it has to be static.
 
-That could be a directory.
+If I took out the static and I made it public, I've got a problem.
 
-That is what I've done.
+If I make it private.
 
-I've created them like that.
+Then that problem goes away.
 
-So when you have, for example, lines 32, 31, p one that resolve P two, it just depends on escaped
+If I make it final.
 
-text onto Dir.
+That's fine as well.
 
-But if it's p two to resolve p one.
+And of course, if I make it static, which is what it was, it's okay as well.
 
-Well, Java doesn't check to see if these are files on the hard disk.
+So in these two particular programs, we had to look at the override annotation and the functional interface
 
-It's working with essentially the strings that are inside those path objects.
+annotation.
 
-So you've got essentially that text to resolve the Dir and all Java can do there is append it on.
+And then in this particular program, we had to look at the deprecated suppress warnings and save our
 
-Because it's clear that text could be a directory, which it is.
+annotations.
 
-And there could be a file, which it is.
+So the previous programs that we looked at focused on the in-built annotations such as the arrow override
 
-And let's show that there you can see as clear that text is a directory and it's got a text document
+and the functional interface.
 
-called Der Inside That.
+These specific in-built annotations can be applied to methods and interfaces respectively.
 
-So that's all that Java can do with touch.
+Later, we will deal with other inbuilt annotations that can be applied to annotations themselves.
 
-So let's go back in on it.
+Now, though, we will turn our attention to defining our own custom annotations.
 
-So there you can see absolute dust resolved, relative just puts now or two onto the absolute one which
+As stated earlier, annotations have a lot in common with interfaces.
 
-ends on Udemy.
+For example, a marker annotation has no elements.
 
-When we do absolutely resolve the file which is named a text, it just depends it on to the end there
+And if you remember, America interface has no methods.
 
-of Udemy and relative.
+Sample marker interface will be the CE realizable interface.
 
-That resolve file just puts name dot text on to the neo two, which is the relative path.
+Annotations as with interfaces can be applied to on related classes.
 
-Then when we put in the absolute three times, all we get back is the absolute each time and we can
+Now remember, we're just annotating our classes, our interfaces, our variables, our types, whatever,
 
-see dirt resolve as text is to as a text.
+just to give extra information.
 
-And then when we do ask the text are resolved or it's asking the text.
+Now you don't have to put them in there optional, so your code will comply without them.
 
-DA Relative izing apart, the relatively easy method constructs a relative path from one path to another
+But if you do put them in, there must be put in properly at all.
 
-one.
+Right.
 
-As with resolve, the parts need not exist on the hard disk.
+For example, you don't have to put it in to get your code to work, but once you do put it in, you
 
-Let's look at this.
+must put it in properly.
 
-If both parts are relative, then relative size assumes that both parts are in the same current working
+Otherwise you get a compiler in relation to the fact that annotations have a lot in common with interfaces.
 
-directory and it works from there.
+In fact, we actually annotate our annotation with the interface.
 
-If the paths are both absolute, then relative size ignores this current working directory and calculates
+So for example, this is the creation of an annotation public.
 
-the relative path from one to the other.
+At interface, my annotation and then open kind of brackets for curly brackets.
 
-If the parts are mixed.
+The ADD interface defines this as an annotation public, not necessarily public or package private,
 
-In other words, one is relative and the other is absolute.
+just fine.
 
-You're going to get an exception from runners relatives.
+So just like a top level class, you can do it like that.
 
-Note that a file itself counts as one level.
+That's a marker annotation.
 
-This will be clear in the examples.
+An annotation element is an attribute of the annotation.
 
-Let's have a look at the examples.
+The elements or attributes can have values.
 
-So let's look at the relative parts method.
+So again, let's look at our annotation, my annotation, and we put in an element called my element.
 
-On lines 14 and 15.
+See the round brackets there?
 
-I'm creating two path objects there.
+Looks like an abstract method and it is of type int.
 
-One, using paths that get the other using path that of both of these are just logical paths.
+That's not a method as such.
 
-There is no cat in the text in the current working directory and there is no firm subdirectory with
+That's returning an inch.
 
-a horse dot text in there.
+That is an element or an attribute called my element that is of type.
 
-So these are two relative paths.
+And we'll see examples very shortly now.
 
-Both are assumed to be in the same current working directory.
+Remember that annotations have their origins in interfaces.
 
-So online 19.
+Essentially, the JVM translates the above elements into an interface method and the annotation itself
 
-I said p one.
+as an implementation of the interface.
 
-Otherwise p two.
+That's all done in the background.
 
-That is asking the question how do I get from p want p to and remember that a file itself is one level.
+We won't see that.
 
-So if I'm ap1 cat of the text, I need to get out of that.
+So let's have a look at this in code.
 
-So that means I need a dot dot because that's one level.
+So here I have a93 and an enum device, laptop or phone that's going to be used later on.
 
-Then I'm going to farm horses dot text.
+Let's not worry about that for the moment.
 
-So that's what the answer is there on line 19.
+On line five.
 
-If I reverse it p to the relatively few one how do I get from P to two?
+I am going to start defining an annotation.
 
-P one?
+Now online seven.
 
-Well, if I'm in firm horses, that text, I need to get out of Horace's text.
+There is an annotation.
 
-I need to get out of farm.
+I've kept them all in the one file I've defined non as public just because it's just easier to see them
 
-Therefore, I need a dot dot slash start and then I go into cattle dot text that if the two paths are
+that way and explain them that way.
 
-relative, let's look at an example where the two paths are absolute line 25.
+This is the annotation human.
 
-I create an absolute path.
+At Interface Human.
 
-Line 26 I create another absolute path one using path to get the other using path of.
+Open their own brackets.
 
-Then in like 20 years I use people in that relative to loan 29 I used to do that P to travel advice
+Closed their own brackets.
 
-people.
+That is a marker annotation.
 
-So like 20 years, how do I get from P1 to P2 when both parts are absolute?
+I could have it as public, but then I just had to put it to a separate file.
 
-Well, if I'm in C column, backslash cattle dot text, I need a dot dot to get out of that cat and
+Then I have another one called on web.
 
-text that brings it back to C call and backslash.
+Now I'm defining some elements, as you can see here.
 
-And then I need to put out a whole firm horse dot text.
+On line 12 of the elements, just like an interface, the methods in an interface are abstract and public
 
-Peer to peer otherwise p one.
+by default.
 
-If I'm in school and backstage home firm passes the text, I need to get out of horses to text.
+Here, start time is abstract and public by default.
 
-I need to get out of firm.
+So for example.
 
-And I need to get out of home.
+I tried to make that private.
 
-I present back to the roof and then I just need to point to cattle that text.
+I get in her?
 
-So that's the answers to those was let me run that.
+If I tried to make it protected, I get her.
 
-And there you can see the answers to those.
+And I tried to make it final.
 
-And then if we mix them up, I'm going to guess an exception.
+I get in there as well.
 
-So it doesn't matter which one, P1 or P2 is the relative, which is an absolute.
+So the final, an abstract can't go together.
 
-Once they're mixed up, there's going to be an exception.
+So think interface and actually you get a lot of what the access privileges are for these elements.
 
-And there you can see a legal argument exception.
+Now, remember, it is going to be in it.
 
-Normalizing a path to normalized method removes unnecessary redundancies in a path so that it resembles
+And what I mean by that is when we apply it, we look down here.
 
-what you would normally type in.
+There you can see start time is assigned a team.
 
-Dot dot refers to the parent directory and thus any directory followed by dot dot can be removed from
+We'll talk more about that now in a few minutes.
 
-the path.
+So what I have defined here is a start time attribute element.
 
-And if you look at the first image here, I'm in the directory c call an eclipse and I go into CD change
+It is of type int and there is a default of nine given.
 
-directory into the read me directory.
+Now, what that means is that this is now an optional element.
 
-Now I'm in the C call an eclipse read me directory and I do see the dot dot that brings me back out
+You don't actually have to pass it in.
 
-of the read me folder into the c call an eclipse.
+You can see there on line 30 where I am using the add on web on the class student that I do not passed
 
-And that's the same as CD.
+in the start time at all.
 
-Read me.
+The next one online, 13 hours per day is also an IT.
 
-Backslash dot dot.
+Now this is not specifying a default, so it is required.
 
-So you can see now when I do change directory into read me and then I've got the backslash dot dot.
+You have to put it in when you annotate with the on web annotation.
 
-It's leaving me any tips because intrigued me and then it comes back out.
+So online 30 hours per day is required.
 
-So that's one of the redundancies that can be removed.
+Online 32 hours per day is required again.
 
-The other one is the dust is refers to the current directory and thus any dot followed by the forward
+Let me try and take out hours per day on one of them.
 
-slash or the backslash escaped can be ignored.
+So find releases there on line 30.
 
-And that's the second image here.
+I get an error that it's missing it.
 
-Again, I'm in the eclipse directory and I do see the dust backslash.
+It is the required element is missing a default value for the element hours per day.
 
-Read me.
+So hours per day on line 30 because there's no default value there.
 
-That is going to bring me into the read me folder.
+It is a required element.
 
-I do CD dot dot to get back out of it to go into the eclipse folder and I can do a CD read me that brings
+You have to put it in.
 
-me into the read me folder.
+So I put that value in and it's okay.
 
-So CD dot backslash read me is the same as c d read me and therefore the dot backslash is redundant.
+Now you can put in Constance as well, as I say, on like 15.
 
-Normalize is useful when comparing different parts.
+As an interface, values are public, static and final.
 
-That's where it's used a lot.
+By default, constants themselves are not considered elements.
 
-Let's look at some code examples.
+This means that the marker interfaces can have constants.
 
-So normalized examples.
+So if I go up to line seven to my marker, as I could say it, x is sign or semicolon.
 
-In man online age, I'm creating a path.
+That will be a constant and that's fine.
 
-Which is a relative path.
+Let's look at line 20, the element type.
 
-I've got a date for such X, for such Y, for a slash dot dot and then or it's a shan't text.
+What are the element types that you can have?
 
-Now the dot for a slash at the start will be removed to simplify it, giving you just x and then the
+What we've seen already on line 12, 13, start time and hours per day are enough.
 
-Y for its nature.
+Again, that's not a method that's returning in it.
 
-Dot, dot, that can be simplified because that's a redundancy as well.
+That is property and attributes, an element that is of type int and you can see them been used there
 
-You just leave it out.
+online.
 
-You're going into Y and then you're coming back out.
+30 hours per days is 96 and then 32 hours per day is three and start time is equal to 18.
 
-So you end up with X for it slash shortcut, text or backslash depending on the system.
+Note when I'm using them.
 
-This is a window system, so it's giving me the backslash in the output.
+Online 30, for example, it's ash.
 
-911.
+And then the name of the annotation.
 
-We're doing a part sort of where we're putting in an absolute pat.
+Like you have at all right now it's at on a web and you just put it on the particular type.
 
-Forward slash X for slash y for save start date for slash z.
+I'm putting them on.
 
-So the y and the dot dot can be removed and you end up with backslash.
+Classes in this case.
 
-X backslash is that line 14 and line 15 are the same.
+So I've got a class student which is also annotated with a human, which is my marker interface.
 
-It's a path out of where you have a.4/a are a dot backslash backslash, a need to escape the backslash.
+So that student is on the Web and is human and are spending 6 hours per day on the Web.
 
-If we normalize that, we just end up with a.
+Now you can put them out one light like that as on 930, or you can break up into several lines like
 
-Because essentially the dot forward slash is just removed or the dot backslash is just removed.
+lines 32, 33 and 34.
 
-Lining it in or creating a path with the dart dart for such acts for such while.
+This worker class on web 3 hours per day and start time is 1800s and then it's human as well.
 
-I know the issue here is that there is no directory preceding.
+So that's how you define it online seven and online nine at Interface and then the name of the annotation.
 
-So when we go to normalize this, it can't be simplified any further.
+And then how do you apply the annotation?
 
-If there was a directory before like we had online is the y was removed.
+Well, that's online 30 and online 3233 at 34.
 
-But in this case there is none before.
+The ash with the name of the annotation.
 
-So nothing can be done to simplify it.
+And then if you've got elements to put in there going round brackets and a comma separated.
 
-There's no redundancy there.
+If it's just a marker, there's no need for their own brackets, although you can put them in as human.
 
-So normalize just gives you back what you've passed in, which is dot dot.
+From brackets is fine as well.
 
-For such x for such y are backslash x backslash y online 22 we create an absolute path a for such b
+Now let's look at the elements types online.
 
-forward slash ..4 such ..4 such y.
+20 The element type must be a primitive type string and enum class.
 
-Line 23, we create a path which is far expected by which is the last part of the path created on line
+Another annotation are an array, so wrappers are not allowed.
 
-22 when we normalize P five, you notice that the first dot dot gets you out of B, that removes B,
+That's a problem.
 
-the second dot dot removes A and you end up with four slash exact y, which is the exact same as p six.
+There are like 22 we've got the string is the type for name of putting in default values because if
 
-So in normalized p six we get backslash x dot y.
+I don't, I start getting errors down where I am applying the annotations.
 
-Name used for such and such interchangeably.
+For example, if I take out the default ESC.
 
-Here I'm putting in four slashes in the pads when it's outputting on the windows system.
+It's going to say where is the required name element when you are applying on web add student and also
 
-I get in the backslash.
+on worker?
 
-When I call in equals online, 26 is p five equal to p six.
+Becomes a required element if you don't put in a default.
 
-No, they're not.
+So I put in default on all of these, so I don't start getting errors when I'm applying the annotation.
 
-The strings are different.
+The next one on June 23.
 
-However, when you normalize p five and then check, is it equal to the normalization of P six?
+Is using an enum.
 
-That is correct.
+So I've got an enum up at the top which is just in a device, laptop com, a phone and then you could
 
-It comes back with true.
+say consume element, it's type is device.
 
-So let's run that.
+The default is device dot laptop.
 
-And there you can see the output there.
+Humans are built as a property and it's going to default to human class.
 
-Now we want to look at file attributes.
+That's what the class is used for their unknown 24, x, three and four.
 
-File attributes are fine.
+Now on this particular one online 25 extra info.
 
-Metadata is data about a file that is not stored as part of the contents.
+This is how you use another annotation or annotating an existing annotation.
 
-For example, the size of the file is an attribute.
+We look a lot more at that in a later section.
 
-I want to talk about files here.
+But now there is the at human you don't use you you use ashe for annotations.
 
-I'm talking about regular files, hidden files, directory files and so forth.
+And then an array.
 
-The files.
+The sites element is a type string array.
 
-Utility class contains several methods for determining file attributes.
+Now note that it's only one dimensional arrays that are allowed.
 
-If you need to read several attributes, then rather than making several method calls, you can, in
+For example, defining it as a 2D array is an error straight away invalid type.
 
-a single method call, obtain a view, which is a group of released attributes.
+But the fact that I'm by default is incorrect.
 
-There are three views.
+It's just an invalid type.
 
-You've got the basic file attribute view, which is a basic set of attributes which are common across
+So in summary, to define your annotation, you use the at interface.
 
-all file systems.
+Can be public or package private.
 
-The dust file attribute view, which is for DOS or Windows Systems.
+There you can see a marker annotation which has no elements at all.
 
-And then you've got the POSIX file attribute view.
+That's the human what, on line seven?
 
-Puzzled stands for Portable Operating System Interface, and we're talking then about Unix, Linux or
+And then line nine defines another annotation called on Web.
 
-MAC Systems.
+And I've got several elements in there.
 
-Let's have a look at these in code.
+If the element does not have a default, then that becomes the required element that you must specify
 
-Let's look at attributes.
+when you are applying the annotation.
 
-First of all, I'm going to call a method called check attributes passing in the path.
+You can specify constants as part of your.
 
-The first time I'm going to create a path to a normal regular file and output its attributes.
+Annotation that's very similar to what you would see in an interface and what you're looking at there
 
-And the second time I'm going to pass in a directory both of these files, the regular file and the
+with the elements.
 
-directory exist.
+Like for example, on line 1213 is very similar syntax to the abstract methods that you would see in
 
-The files.
+an interface.
 
-Utility class is very useful here for finding the attributes of the path.
+It's not quite the same thing in the sense that what we're saying here, that is an attribute start
 
-I can use online 20 is directory 21 is the regular file is symbolic link online 2223 is readable is
+time and it's type, is it?
 
-relatable online 24 alone 25 is executable.
+But you can see the origins of annotations from interfaces.
 
-All of those will come back with a boolean, true or false as to whether the particular path in question
+They're very similar to abstract methods and that's in fact what happens in the background.
 
-is a directory, regular file, etc. etc. there don't throw an exception.
+But that's just to show you the relationship between interfaces and annotations.
 
-However some other ones do like is hidden online 28 throws an Iowa exception size throws no exception
+Then we looked at the various different types that you can have for your elements.
 
-online 29 and get last modified time throws an exception as well.
+In addition to primitive types, you can have string, and in a class you can annotate another annotation
 
-That's on line 30 now.
+or you can have an array.
 
-It's not very legible to get last modified time.
+What about applying your annotation that once you have defined well, then you use the ash with the
 
-It comes back with a file time and I convert that to two milliseconds.
+name of the annotation and then if there are required elements, they go in and name of the element
 
-The two milliseconds is the number of milliseconds since the epoch and you can see the epoch common
+equals value of the element and the type must be correct.
 
-fare in like 21 that is midnight on the 1st of January 1970.
+So the hours per day is an int.
 
-That's not very legible either from the point of view of putting a large number a long.
+So if I put in a string, obviously that's a problem.
 
-But we can convert that to something far more readable by using the file timed out from milliseconds,
+And if you leave out everything else, but you can replace the default values if you so wish.
 
-we pass in the number of milliseconds from the epoch.
+Like what I am doing.
 
-This is online 33, and then we convert that to an instant, and once we have it as an instant, we
+There are 932 of a place at the start time.
 
-can zone that instant using the ad zone, passing in the zone that I'm currently in, which is Dublin,
+To be 18.
 
-in Ireland, in Europe.
+Where?
 
-And then I can output that.
+Its default value is nine.
 
-And you can see there it's coming up with the fifth of the fifth, 2022 at 952 in the morning.
+And I'm just putting on these annotations in front of classes.
 
-And then you can see the plus one for Europe slash Dublin because we are one hour ahead of GMT, UTC,
+So that's your own custom.
 
-Zulu time because we move the clocks forward for summer time.
+Annotations, how to create them or how to define them and then how to apply them.
 
-So let's run that.
+And the compiler will just enforce the rules.
 
-And you can see the first one, the attributes that Java, which is the Java file, is a directory,
+Like, for example, what are the types of the elements and if they're required or optional?
 
-nor is it a regular file.
+So I want to have a look now at some shorthand annotations, shortcuts, if you like, that the compiler
 
-Yes.
+would help you out with a few different examples of this.
 
-Is it a symbolic link?
+First one that I'm going to look at is where the value element is used.
 
-No.
+This is the one where if you're going to use the shortcut, for example, on line 14 or I am not specifying
 
-Is it readable?
+the name of the element there at all, then that means that that annotation team has got to have a value
 
-Yes.
+element in there.
 
-Is it right?
+It also means that you cannot have any other required element because as you can see on line 14, I'm
 
-Yes.
+passing in calling.
 
-Is it executable?
+The compiler has to know that is only for the value element and that there is no other one that is required.
 
-Yes.
+So if I go along here on this other one non-players and I take away the default value, now it becomes
 
-Is it hidden file?
+required and therefore I start getting errors because when I try to annotate team on line 11 and 914,
 
-No.
+I'm not passing in anything for non players.
 
-What's the size?
+I am on line ten.
 
-1936 bytes and get the last modified time that comes back with a long.
+So that's why there is no compiler on line ten.
 
-But when we do some formatting on converting it into a legible date and time, you can see there that
+So I'll put that back so you can see it's the value element that you have to specify.
 
-we have a days and a time separated by T and then you've got the plus one hour because we're one hour
+Whether you specify a default or not is immaterial.
 
-from GMT, then we pass in a directory and it's essentially the same details, except that you'll notice
+It can be a required or an optional element.
 
-that it's not an irregular file, it's false.
+That's absolutely fine.
 
-And also the is directory comes back with true.
+So there you can see now when I apply the annotation team on line ten, I'm specifying all of the elements
 
-That's what I passed in that one for, just to demonstrate the difference there.
+and their values.
 
-Let's have a look at the view here.
+Note pairs of six and values is valuable.
 
-I'm going to be doing two things.
+Online 11.
 
-I'm just going to be reading it, which means I can just go with the files, read attributes as the
+I'm leaving off the known players element and I'm specifying that the value element is tennis and I'm
 
-comment says, online 12.
+annotating the method, strawberries and cream with that particular annotation.
 
-But then I'm going to change the last modified time.
+And now in the next one alone, 14.
 
-In order to that, I need to call the files that get attribute view.
+I'm leaving out the value equals and I'm leaving out non-players.
 
-I need to actually call that method, first of all.
+So if you do have a style like that as a team and then you're passing and curling and there's no element
 
-And then I'm going to use the basic file attribute view read attributes.
+being named, that means that you have to have a value element in the team annotation.
 
-That's the on online 22.
+And there can be no other required element as part of that annotation.
 
-So the subtle difference in both approaches, the path I'm going to be passing in is the attributes
+That's the first example.
 
-that Java that's on line 13.
+The second example.
 
-Then on line 15, I'm going to get the basic file attributes using the false start read attributes,
+Relates to arrays.
 
-passing in the path and asking for the particular attributes that I want, which is the basic file attributes
+We are going to pass in only one element.
 
-you put in the class.
+So I've got an annotation quiz or topics is the element name and it's a type string array.
 
-That's how you tell Java that you want the basic file attributes.
+In the class competitor.
 
-Now that I have that particular basic file attributes I can call the is directory is regular file is
+I'm annotating some instance variables.
 
-a symbolic link size and last modified time.
+The first one I am annotating here I am annotating it with quiz and topics is equal to the string array,
 
-So there's only one method call there.
-
-Whereas in the previous program we had several method calls to get that particular data, those attributes
-
-back, get that metadata back.
-
-Is directory comes back with false executive file is true is a symbolic is false there is a size one,
-
-two, three, six.
-
-And the last modified time when I ran this for was the fifth of the fifth at all 925 and there's a Z
-
-at the end there on line 20 that gives you indication that this is a Zulu timestamp, UTC, GMT timezone.
-
-Now let's go and change.
-
-The first thing I want to do is call the false start, get attribute view, passing in the path with
-
-the basic file attribute view.
-
-So the subtle difference here, I'm looking for a view now this time because I want to change it.
-
-Whereas basic file attributes class was all it passed in like 15.
-
-Now online 23 and passing in basic file attribute view the class that causes the basic file attribute
-
-view.
-
-And then with that reference, I can call the read attributes.
-
-So I'm not using the files to read attributes.
-
-In this case on I 24, I'm using the basic file attribute view read attributes that gives it back basic
-
-file attributes.
-
-Now what I'm going to do here is I'm going to change the last modified time.
-
-I'm going to add on 30 minutes.
-
-So I'm calculating that in milliseconds, 1000 milliseconds in a second, 60 seconds in a minute.
-
-Multiply that by 30 for 30 minutes, then I'm going to use the file time data from milliseconds.
-
-And I'm going to pass in to that the attributes that last modified times that we can bring back the
-
-last modified time.
-
-I convert that to milliseconds and then I will add on to 30 minutes in milliseconds.
-
-So that gives me a less modified time as a file time, which is the way you have to pass it in in the
-
-set times on 928.
-
-The set times online 28 takes in three file time references.
-
-One is for the last modified time.
-
-The second one is for the last access time, and the third one is for the creation time.
-
-Now, if you're not changing any of them, you pass in NULL and Java will leave them as they are.
-
-So I'm passing in the last modified time because I want to change it.
-
-So the last modified time should be 30 minutes past what we just retrieved online.
-
-20.
-
-So now I'm going to say online 30 let's read the attributes again using the files dot read attributes
-
-again basic file attribute start class.
-
-And then I'm just going to get the view that last modified time.
-
-And you can see here when I run it the last time the timestamp was 955, which is 30 minutes after the
-
-925, which you read on line 20.
-
-But let's run it again.
-
-And all I want to make sure of is that the second timestamp is 30 minutes after the first one and it
-
-is 1025 and 1055.
-
-So again, is directories files is regular files, true is symbolic, it is false and there is the size.
-
-So that was reading the attributes as a group, as a view.
-
-They're all related.
-
-So it seems at the time of making several calls, several independent calls, you make one call and
-
-then you just interrogate what you've got back.
-
-Another useful feature from the files utility class is the lines method, which takes in a path and
-
-gives you back a stream which you can then process.
-
-Now in the stream section, we did this particular example, so if you want to skip by a certainly can,
-
-it's 3 minutes long.
-
-You can stream from a file and the files dart lines method is going to be important here.
-
-It takes in a path and then it returns a stream of string which represents a stream of the lines from
-
-the file.
-
-We'll go to use the for each method, which is a terminal operation to kick all that off.
-
-And then the for each, like the one with the collections it takes in a consumer.
-
-So we have a for each in the collections and we have a for each in stream.
-
-Here we have a simple class cast and then we have the text file where the name of the cat and the color
-
-of the cat are separated by a slash.
-
-Fido is black, lily is white.
-
-This is the output that we're going to generate, which is the cat.
-
-That's the name of the cat and that's the color of the cat.
-
-So it made we call the method Lord Cats passing down the cat start text, text, file inside the Lord
-
-Cats method.
-
-We create an ArrayList.
-
-Which is of type cash.
-
-Then we call in the trai with resources.
-
-Files dot lines were passing in the past.
-
-Guests passing in the file of that.
-
-We received it to this method that will come back with a path object which files dot lines will use
-
-to create a stream of string.
-
-The for each is a terminal operation which will kick off that particular stream.
-
-And what are we going to do?
-
-We're going to take in each line from the file, and we're going to break it up using the split method
-
-into a string array.
-
-So for the first line, Fido will be category zero and Black will go into category one.
-
-We then create a new cat based on that, a pass added to our array list.
-
-When we're finished, we return cats, which caused to the return on line 25.
-
-We then do a cat's for each to output.
-
-So there's two different for each is going on here.
-
-Two for each.
-
-Unlike 26 is the collection for each, whereas the for each and line 31 is the stream for each.
-
-What's interesting to note here now is that the cats declared on line 29 cannot be changed inside the
-
-lambda, which is declared on line 31.
-
-That's because local variables in the scope of the lambda must be final or effectively final.
-
-So in other words, I cannot change the cards to point to a new ArrayList.
-
-However, I could have a side effect which is basically saying I can add cats to the ArrayList as long
-
-as I don't change the reference cat itself.
-
-So this is the search directory program.
-
-You can see on line 11, I'm using the start path of let's get certified.
-
-Forward slash now order two.
-
-Let's get certified as my YouTube channel name.
-
-Now I'm using the tray with resources on line 12.
-
-That's important to prevent a resource leak in it.
-
-I'm creating a stream of path using files dot find.
-
-So that's going to return back a stream of path objects.
-
-The first argument two files to find is the start path.
-
-That we've created online.
-
-11.
+general knowledge and music.
 
 That's fine.
 
-Ten indicates the depth of the search.
+There's two elements there.
 
-That's ten subdirectories.
+Curly brackets signifies that it's an array and its comma delivers.
 
-That's absolutely more than needed in this case.
+The second annotation, I'm using just one element in the array that's on line 24.
 
-Then we've got the by predicate, which is very useful here.
+The next one is the equivalent of loan.
 
-This is going to come back with true or false.
+24 is on line 25 where I leave out the curly brackets.
 
-And basically it comes back with true.
+So it's topics equals double quotes.
 
-It'll put that path object into the stream, and if it's false, it won't.
+Sport double quotes.
 
-So we've got a path.
+The compiler will insert the curly brackets for you in that case.
 
-And the second one is the attributes, the basic file attributes.
+However, let's look at some of the do not compile.
 
-We're going to use bulleted here to determine if we want this particular file in the stream or not.
+You need the curly brackets for that particular one.
 
-So is it a regular file?
+We're specifying sport and jazz.
 
-We can use the attribute to determine that.
+And then null is not allowed either.
 
-And does the path when we convert it to a string, does it end in Java?
+You need a constant expression required.
 
-So is it a regular file which ends in Java?
+Even curly brackets is okay because that's just an empty array if I put that in.
 
-If it is, we want it part of the stream.
+You can see there that's accepted.
 
-And if not, we want it ignored then unknown 15.
+And now we can actually combine the two of them together.
 
-We use a for each to go through the stream and output it to the screen.
+So we're going to combine both short, hence the value element and then the arrays with one element.
 
-So let's run that.
+So here in the annotation colors, I have the value element and I have an array.
 
-And there you can see there are the Java files for this particular section of the course.
+It's a string array.
 
-Now let's go back and change the path that we want to start out with the root of our directory search
+So the first one there on line 39, I'm annotating the instance variable color one with the colors annotation
 
-to be let's get certified.
+and I'm specifying value equals the string array with red in it.
 
-So this should list a lot more Java files because there's a lot more directories in that.
+So everything is specified, there value is specified and the string array with the curly brackets.
 
-And there you can see there are the Java files that I have written as part, of course, so far.
+The second one, which is on line 40, this time I'm using the shorthand for the array.
 
-Now let's focus on the last section.
+I'm leaving out the curly brackets.
 
-Serializing and serializing Java objects.
+The third one, I start applying the shorthand for value, so I leave out the value equals on it and
 
-What is serialization?
+I just specify the array with readiness.
 
-Well, civilization is the process of converting and in-memory Java object and saving it to file.
+And then the last one on line 42, I'm actually applying both the value element and the single element
 
-Decentralization is the opposite is the process of converting from a file to a Java object.
+array.
 
-To inform Java that your class is surrealism, you implement the marker interface, serialism, and
+Just double quotes red.
 
-that's with a Z.
+So there the shorthand that can be used for annotations.
 
-America interface is an interface that has no methods.
+So the next section I want to look at is annotations that can actually be applied to your own annotations.
 
-And you apply serialism to data oriented classes as their status is not short lived.
+So this is as opposed to applying built in annotations to types like methods, interfaces, fields,
 
-As we're serializing objects, instance variables and not static variables are serialized.
+etc. we can actually apply built in annotations to annotations themselves.
 
-One notable exception is the civil version uad their.
+For example, you might want to limit where your annotation can be used, or you may want your annotation
 
-It is a static which is serialized as part of the serialization process.
+information included in Java Dock documentation.
 
-What is it used for?
+Let's look at the Target annotation.
 
-It is used to synchronize the class definition with the stored data.
+This limits the types that the annotation can be applied to.
 
-For example, what if a new field had been inserted into the class definition which you were attempting
+The types are specified as an array of element type enum values.
 
-to do, serialize a file that had been serialized with the old class definition?
+Let's have a look at this in a value list.
 
-In other words, the data on file did not have the new field that is in the class definition now.
+So the element type values are on the left and the scope are.
 
-This resulted in an invalid class exception during the serialization.
+What it applies to is in the right.
 
-The transient keyword.
+So if it's set to type, it means you talk about interfaces in those classes and annotations.
 
-What is that used for?
+If it's such a method, you're talking about method declarations as opposed to the method called.
 
-This is used to prevent a field from being serialized in America as transient, and it will be skipped
+If it's such a parameter.
 
-as part of the serialization process.
+Are you talking about constructor and method parameters?
 
-When being serialized, a transient field will revert to its default java value null for string or any
+Field would be instance and static variables.
 
-other type 040.04 double, etc. So a transit field will not be serialized when the file has been created.
+Constructor.
 
-But when you're DC realizing that back to an object, you need to put something in for that field because
+Constructor Declarations.
 
-it's in the class definition.
+Local variables.
 
-What happens is to get the default values.
+Local variables.
 
-In summary, other than the serial version used, only non transient instance members are serialized.
+Annotation type annotations.
 
-So you're transient fields.
+Most of these are all very self-explanatory.
 
-You're static fuels.
+Type use requires a little bit more explanation because it can be used anywhere.
 
-They are not serialized except for that surreal version.
+There is a java there to take.
 
-You.
+This includes where the tapes are used.
 
-Regarding your instance variables.
+For example, object creation with new.
 
-If they are types like personal cat and so on, ensure that they are serialized.
+So let's have a look at this in operation code.
 
-But also, for example, if pen is realizable and has an instance variable of type nib, then if you
+So the first thing to notice in lines four and five is that while Java Lang is automatically imported,
 
-are serialized in pen, nib must also be serialized, but I will see an example of that in code.
+Java language annotation is not.
 
-It would give you an exception.
+And we need elements to type and target from the annotation package.
 
-Not a compiler, but an exception.
+So initially going to start out with an annotation data item and I have no target set on us, so it
 
-Serialization requires the use of two classes, the object output stream and the object input stream.
+applies wherever I'm using it.
 
-These classes are considered high level classes and will wrap lower level classes such as file output
+So I've got no problems at the moment where I'm using data item between lines 12 and 20.
 
-stream and file input stream.
+Let's uncomment line seven.
 
-Typically we would start with a file stream, wrap it in a buffered stream to improve performance,
+So now I'm saying that the target for this annotation data item is for fields and parameters.
 
-and then wrap the buffered stream with an object stream to access the serialization.
+Now I've got a problem on line 12, 13 and 18 because I'm trying to apply the annotation data item on
 
-Do serialization methods write object and read object.
+a class and on an interface and on a constructor respectively.
 
-Let's have a look at some code now.
+And each time you're going to get the error message that the annotation type not applicable to this
 
-The first part that I want to concentrate on here was that pen nib.
+type of declaration.
 
-Example where you're going to end up with an exception.
+That's the first point.
 
-So you can see in Chinese I've got a class book which implements serialism.
+Let's go and increase.
 
-Materialism is coming from the job that I'll package, so I need an import for that.
+The scope of it by saying, okay, let's put in 11 typed out constructor online is now the error that
 
-It contains a book marker.
+was online.
 
-Instance variable on line nine.
+18 disappears.
 
-So if we go down now and look at book marker.
+And what if I make a tape use?
 
-There you can see online 28 book marker implements serialize but that's fine.
+Well, that's clears them all.
 
-Book marker has an image instance variable online 29.
+You can use it everywhere.
 
-However, online 32 you can see that the class image does not.
+So all of the arrows go away.
 
-Implement serialism.
+Let's look at tape use in a little bit more detail.
 
-So when in Man, I go along and I wrap my file output stream in a buffered output stream in an object
+I'm applying as online 22 to the annotation wild card online 23 So you can see I've applied it to an
 
-output stream.
+instance variable online 26 class variable online 27 a method parameter online 29 a local variable at
 
-I create a book.
+930 when I create a new instance online 31 you can apply it there and also to a cast online 33 So it's
 
-I set the author to Shawn Kennedy, and then I attempt to write out that book object using the right
+very flexible like that.
 
-object, which is coming from the object output stream class.
+The type use, the next annotation I'd like to look at is retention.
 
-That's the way you serialize data.
+If you remember in generics we encounter what's known as type erasure where certain information is discarded
 
-I'm going to get an exception there because that image should be serialized.
+by the compiler when converting source code into a class file.
 
-But let's run that.
+Similarly, annotations may be discarded at compile time at runtime or not at all.
 
-And there you can see not serialized exception is coming up and it's because of the image type.
+We can control when this happens by using the retention annotation.
 
-So let's go back and fix that.
+We specify the level of retention using an enum value from retention policy.
 
-There are two ways we can fix it.
+So let's look at the retention policy values.
 
-Fix number one is to make Image C realizable, so let's run that.
+If you specify source, it means that the annotation will be in the source file only.
 
-And there you can see there's no exception anymore.
+Compiler will discarded after that.
 
-The other fix is if image has to be left like that, well then I could go to where it is contained in
+If you use class, it means that the annotation is stored in the class file, but it is not available
 
-the book marker and make the image instance transient.
+at runtime.
 
-So now it will not attempt to serialize that image.
+This is the default compiler setting.
 
-I want to run that.
+And if you have it set to runtime, then it's stored in the class file and available at runtime via
 
-I get no problems with that.
+reflection.
 
-So the next thing I want to do is look at all three.
+Here is some sample code to demonstrate how to use it.
 
-I want to set it up now so that it will serialize.
+Note that we have to import retention and retention policy from the annotation package.
 
-Okay.
+The first annotation mouse.
 
-So let me put this back to.
+I've put a retention of sauce on that, which means that the annotation is discarded by the compiler.
 
-The image is been serialized.
+In other words, it's not in the class file at all.
 
-So it's a serialized type, so that's fine.
+Second one keyboard.
 
-I am writing out the author, which is Sean Kennedy.
+I have annotators with a retention policy of runtime.
 
-I've got the code down here further, which I will borrow for to serialize in the book.
+The annotation is stored in the class file and it is available at runtime.
 
-An old pace started there.
+The next annotation I want to look at is the enhancers annotation and it should be no surprise given
 
-Now I need imports.
+that all P has an Hirsch and as a core principle that annotations can be inheritors.
 
-So I just had them in.
+This is best explained with an example.
 
-So it's a file import stream referring to book ACR.
+If we mark a parent class with an annotation that is in heresies, then that annotation is in Hirsch's
 
-Wrap that in a buffered input stream for efficiency performance and then wrap that in an object input
+into the subclasses.
 
-stream.
-
-Then online 53 I going to call the read object method, which is in the object input stream.
-
-Now that's going to come back with an object.
-
-So I need to down cast that to a book and then I'll have a book reference, be referring to us.
-
-And then I'll output what is coming on my book.
-
-Now my book has a two string at the moment, which is just giving me back the author.
-
-That's perfect.
-
-That's what I want.
-
-I just have a before and after.
-
-Let's run that.
-
-And there you can see before it's Sean Kennedy and after it's John Kennedy.
-
-Now, what's interesting there.
-
-Is that you can see on line 16, the constructor for book says that the author is on Unknown.
-
-But down there online 45.
-
-I'm changing the.
-
-Author Sean Kennedy.
-
-So therefore when we are serializing the book, we have just proven that the constructor is not called.
-
-The constructor is not called otherwise.
-
-I'd be getting honored for my author afterwards and I'm not even getting John Kennedy.
-
-So to serialize John Kennedy as the author as the book object and it is do serialized it back the contents
-
-correctly.
-
-Now if I make this transit.
-
-Watch what happens now.
-
-There you go.
-
-Beforehand, the details with Sean Kennedy.
-
-It is a transient variable, so therefore it is not serialized.
-
-So there is no details for author output in the file.
-
-So when is reading it back in?
-
-Because there is an instance variable called the alter.
-
-It's got to put something in there.
-
-And because it's a type, a string type, it gets the default for a type, which is not.
-
-So the next version of this requires significant changes.
-
-And then I'm going to bring in Hirsch and sent to us and the subtype will be serialized, but the parent
-
-will not.
-
-So what I'm going to prove here is that if your type is serialize able, then the constructor will not
-
-be called as we've just seen here with the book.
-
-However, if your parent is not serialized, then that constructor will be called during the serialization
-
-process.
-
-So I'm just going to copy and paste code, which I have done here at the bottom.
-
-So let's look at what I have here now.
-
-I've got a class called info medium with an instance variable.
-
-The medium.
-
-In the constructor.
-
-It's been set to unknown.
-
-This constructor is called When Serializing.
-
-This class is not serialized.
-
-The information was not realizable.
-
-Then I've got simple set of get methods.
-
-The book extends from the info medium implementing serialize, but so this book is serialized to the
-
-book constructor however where it sets the author to on non.
-
-It is not called when do serializing as this class is serialized, but it's important to realize that
-
-if your class is too realizable, the constructor is not called during this serialization.
-
-However, if your class is not serialized, then the constructor is called during the serialization.
-
-I've got a two string online, 39 and 40 gives me back the medium, which is the parent instance variable
-
-and the author, which is the current instance variable.
-
-Because I want to see what is the value of the medium and what is the value of the author.
-
-So we're done here in serialization, I'm creating a book, I'm setting the medium to print, setting
-
-the author to show Kennedy outputting before I remember now book is serialized but for medium is not
-
-so be nothing for the medium.
-
-So when we come back to DC realized that book, the read object part of the process will be okay.
-
-The book is serialized full, so John Kennedy will be serialized back in for the author.
-
-However the parent which is info medium.
-
-Is not.
-
-So the medium would be initialized because it's a constructor there, so it'll be unknown.
-
-So whenever the before should say print.
-
-Shawn Kennedy and the after should say unknown.
-
-Shawn Kennedy.
-
-And there you can see before Sprint, Sean Kennedy and after his own known Sean Kennedy.
-
-And the last thing I want to do now is to generate the invalid class exception where the class definition
-
-is different to what stored on file.
-
-So let's say I just put in another string.
-
-I won't try to serialize it now.
-
-I'll just try to do serialize given how the class definition has changed.
-
-There you can see invalid class exception.
-
-And there you can see the serial version.
-
-IDs are different.
-
-No, I haven't put one in, so it's obviously generated somewhere in the background.
-
-But typically that's what you're going to use the serial version used for to make sure that the class
-
-definition matches what's stored on the external file.
-
-Now we can also actually insert our own code into the serialization process.
-
-This will be very useful for any customization code that we may want to use.
-
-For example, we may be storing sensitive data that we do not want to store in plaintext, so may want
-
-to encrypt us before we store and then we will decrypt it on the way back.
-
-Let's look at how we customize serialization for our own purposes.
-
-So I've created another class here, important book, which is serialized.
-
-I have an author and ISBN and I have an author age over my serial version UAD.
-
-On lines 21 to 24.
-
-I'm defining an object stream field array.
-
-This array specifies the fields that you want to serialize.
-
-If you look at it from a security perspective, it's like a whitelist where some fields marked as transient
-
-is like an element that is blacklisted from the point of view of security.
-
-It will not be stored at all.
-
-So you can think of this object stream field array as the opposite to transient.
-
-Transient says Do not write out this particular field.
-
-Object stream field means output this particular field.
-
-So on 922 we want to output author and 23 we want to output ESPN by virtue of the fact that Author three
-
-is not included in this array.
-
-That effectively means that all three rage is transient.
-
-It will not be able to serialize file.
-
-There is a regular constructor and two string.
-
-I'm opening Arthur Edge just to show you something at the end.
-
-Here is our custom code.
-
-We have two particular methods that we can insert here.
-
-Lines 38 to 44 is the right object.
-
-This is for customizing the serialization aspect.
-
-Only 39.
-
-We use a field of type object output streamed output field and we get access to that by calling the
-
-put fields method in the object output stream.
-
-That gives us access to the fields in a way of saying we are going to push the name of this field with
-
-this value.
-
-As we can see on lines 41 to 42 where we say push alter with the instance variable, alter and push
-
-this particular field, which is called ESPN and give it the value ESPN.
-
-And then we write fields using the object output stream.
-
-So we call put fields on the object output stream at the start to gives access to this port field.
-
-And then we use the push method on this port field to insert the data with particular names.
-
-To customize the serialization process is the exact opposite.
-
-We've got a read object method that we put in now and it's passed in the object input stream.
-
-Now we use the object input stream.
-
-The method read fields.
-
-And that gives us a get field.
-
-Once we have the jet filled, we will call the get method and then we'll name the field and then we
-
-can pass in the second argument, which is null in both cases.
-
-This is what will come back if there is no value for that particular field.
-
-So in line 49, we're looking for the author and we'll cast it to a string and online 50.
-
-We're looking for ESPN and we're cast to a string as well.
-
-The rest of the serialization code is same.
-
-We create a file output stream, wrap it in a buffered output stream, wrap it in an object output stream.
-
-We create our book and then we call the write object, which is going to call our own cluster method.
-
-No.
-
-Then we serialize it afterwards.
-
-And again, it's going to call our custom read object method.
-
-So let's run that.
-
-And there you can see Joe Bloggs with that particular ISBN is serialized.
-
-Now that's a two string call we created with your blogs whose age is 35.
-
-However, when we do serializing it, we get back to your blogs because that was serialized.
-
-We get back the same ISBN because that was also serialized, but the author age was not serialized.
-
-So we end up with a default value.
-
-It is an int default value for an entry is zero.
-
-So that's how you would customize the serialization process.
-
-So from a security perspective, if you wanted to encrypt your data, it's at lines 41 and 42, you
-
-would do that.
-
-But then you've got to decrypt it, of course, when you're serializing online, 49 and 50.
-
-In this section I want to look at local variable type inference.
-
-LV t i.
-
-Java is a strongly typed language.
-
-In other words, you must specify the type of a variable when you are introducing it.
-
-However, since Java ten, we have the option in certain situations of using the keyword via instead
-
-of specifying the type.
-
-In these situations, the compiler infers the type.
-
-For example, there x is a double quotes.
-
-ABC X is inferred by the compiler to be of type string.
-
-Remember that the variables must be local and they must be initialized on the line where they are declared.
-
-So here, for example, you can't declare your variables in this space here, which is outside all of
-
-the methods and within the class.
-
-That's where your instance variables go.
-
-That's for your class variables, cause neither of those are local, so neither of them are allowed
-
-to be vias inside the method here.
-
-That's where your local variables are.
-
-So you can see here var x is assigned to y's and 3.2 and T is assigned to ABC, meaning X, Y and Z
-
-are interval and string respectively.
-
-Remember to initialize your vars on the lines where you declare them.
-
-I'd like to have a more detailed look at the rules surrounding VARs.
-
-Looking at a program number one.
-
-Where can they be used to remember their local?
-
-So they are inside blocks of code like constructors methods or initialization blocks.
-
-So that's number one.
-
-Let's look down through the code.
-
-Here's number one.
-
-This is just an instance initialization block.
-
-It's inside the class, but it's not inside any methods.
-
-So you can see there there's the class, curly brackets, there's the instance initialization block
-
-and there is a local variable decoration.
-
-VAR is assigned 4.5.
-
-This variable D is now a double.
+So let's look at an example.
 
 Here.
 
-I'm inside a constructor.
+I have an annotation.
 
-There is a sign nine.
+Breathe in.
 
-So I know an inch.
+Water online is.
 
-And then I'm inside of method here.
+Online.
 
-Main there is a signed double.
+11.
 
-ABC so s is now a string.
+I'm Mark.
 
-So they're valid declarations of look local variable type inference where the compiler infers the type.
+The class fish has been able to breathe in water.
 
-Where can you not use them?
+Online.
 
-Number two Well, you can use them as constructor parameters or method parameters or static class variables.
+13.
 
-Remember their local.
+I have a class trout which extends.
 
-And there is one caveat and that's where lambdas where the parameter type can be inferred.
+Fish.
 
-Let's look at that.
+Now this class trout is not able to breathe in water essentially at the moment.
 
-So here I have an instance variable declared outside all the methods put inside the curly brackets of
+Let's look at one way I could solve this.
 
-the class not allowed.
+I'll take the annotation, breathe in water and I will apply it to the class trout.
 
-Var is not allowed here.
+Now the trout can breathe in water as well.
 
-There's a class variable.
+However, there's another way of doing it.
 
-It's static.
+I will take that back.
 
-Var is not allowed there either.
+And what I will do is I will mark the interface, breathe in water with the extra annotation enhancers.
 
-Here is two I've tried to put in there x as my parameter to my constructor.
+I need to import that from the annotation package.
 
-Not allowed.
+Now the breathe and water annotation is an inheritable annotation, so I apply it to fish.
 
-Here's an ordinary method where I try to put in var x is not allowed there either.
+That means any subtype of fish will also be able to breathe in water.
 
-Even though I'm calling it with one.
+So trout is now able to breathe in water and I don't have to annotators explicitly anymore.
 
-It doesn't infer that it's an integer.
+And the last annotation I want to talk about is repeatable.
 
-It's just not allowed.
+So this annotation, AABB, allows us to specify an annotation on a type more than once.
 
-And then the caveat was, we'll look at this list here.
+By default.
 
-I'm adding A, A and B and I'm calling the remove.
+You can't do that.
 
-If so, it's passing in a predicate.
+This is useful if you want to use the same annotation but with different values each time.
 
-And basically it will remove every A in this case.
+Thus it is not much use for macro notations.
 
-So it's a predicate, which is a test method.
+Remember, background annotations have no elements.
 
-Test method takes in one argument and it returns a boolean that's going to evaluate to true or false.
+He's actually requires two annotations to set up the repeatable.
 
-Now because we're working off a list of string java nors if I go down to its barebones.
+One is a container annotation which has a value array element.
 
-The TARDIS is a string.
+The type of the array is the annotation that you want to repeat.
 
-So it's legal to put the voucher in there.
+Two is the annotation that you actually want to repeat.
 
-Okay.
+This is annotation as follows the repeatable annotation and in wrong brackets the container annotation
 
-That's one caveat with it.
+named after class.
 
-But normally.
+So the link is going both ways from the first annotation to the second one and from the second one back.
 
-Format, the parameters just don't do it.
+Let's have a look at an example in code.
 
-B The constructors are normal regular methods.
+So the first thing you'll notice on line five, six and seven, I'm defining the container.
 
-Number three, a variable is always initialized on the same statement where it is declared.
+Annotation by convention is the plural of the annotation that you're trying to repeat.
 
-For example, var x is assigned s, making x and int.
+Online six.
 
-So let's look at that.
+You can see there is the value element and its type is an array of battery.
 
-Their X semicolon x is assigned to.
+So battery is in fact the annotation that we want to be able to repeat.
 
-That is a problem.
+Line nine, ten, 11, 12 and 13 defines the actual repeatable annotation that we want.
 
-These two statements need to be one statement.
+Online nine.
 
-In other words.
+We specify repeatable on the batteries class so that is in fact the container sets the link back to
 
-X is assigned to semicolon.
+the container online five and then on line ten.
 
-That semicolon finishes the statement.
+We define the annotation battery, which is the annotation that we want to repeat.
 
-You can't have them over.
+We have two elements in there, a level which is of type, string and recharge, which is boolean.
 
-Two statements basically cannot infer the type for local variable x.
+So you can see we're linking both ways in these annotations.
 
-You cannot use var on variable without an initial either.
+You can see the repeatable linking to the container batteries with the batteries class and then you
 
-So we've got plenty of examples where we do it in one statement like there.
+can see the battery been linked to from line six with the value element.
 
-And like their.
+And then you can see and I'm 15 and 16, I'm repeating the battery annotation on the electric car class.
 
-But that three, there is a problem.
+915 I say if the level is high in the battery, then recharge is false.
 
-Number four, the value of a can change, but the type cannot.
+You don't need to recharge the battery.
 
-So let's have a look at that.
+However, Line 16 says if the level of the battery is low, then you need to go and recharge.
 
-So here.
+So that is how you would set up an annotation so that it can be applied more than once on a type.
 
-We've declared.
+In this section, we're going to look at security.
 
-De Verde is saying 4.5.
+They're the topics that we're going to look at as specified by Oracle in the 819 section.
 
-It is now a double.
+The first section we want to look at is ensuring data integrity by examining how to create a secure
 
-It's like put in there.
+object.
 
-So the value has changed from 4.5 to 98.9.
+First, we want to look at is accessibility.
 
-However, I can go along and change it to double quotes as that really shouldn't come as a surprise
+Well, this is fairly straightforward.
 
-to anyone.
+You limit access as much as possible.
 
-It's now double because of the type inference from there.
+And this is based on the principle of least privilege.
 
-Yes, you can change the value that's in there, but you can't change its actual type.
+Instance, variables and methods should be marked as private unless you have a good reason to increase
 
-Number five, there cannot be simply initialized to null cast and null to a type first.
+the accessibility.
 
-What do I mean by that?
+What about extensibility?
 
-Well, here is the problem.
+Well, that should be restricted where required as well.
 
-Okay.
+In other words, prevent subclasses by marking the class as final.
 
-It doesn't know what type to infer.
+Because if it can be subclass methods can be overridden and users who want to create malicious software
 
-That is a novel, which means it's a reference type.
+can then do so by overriding those methods.
 
-But is G supposed to be a string, a double, an integer?
+Immutable objects are objects that cannot be changed after creation.
 
-If you've got a person or a car or a cache or a dog, it doesn't know.
+They are secure objects and they demonstrate the properties that we just discussed in ensuring data
 
-It does know so.
+integrity.
 
-But you have to cast, first of all.
+They do this by following these guidelines.
 
-No, it says, oh, I know it's supposed to be a string.
+There are no set or methods provided.
 
-So just don't initialize.
+So you can't change the data.
 
-It's not like that.
+All of the fields are private and final.
 
-It cannot infer the type.
+They're private, as we just discussed, and their finances are one.
 
-Number six var not allowed in multivariable declarations.
+They are initially given values that cannot be changed after that.
 
-So here, as you can see, it is a three cover.
+We're going to prevent subclasses.
 
-Please sign four is not a problem.
+This prevents overwriting by marking the classes.
 
-Can do that would fire.
+Final hours is another technique where you can make the constructor private and provide a public static
 
-Seven.
+factory method which calls the private constructor create.
 
-Var is a reserved name, but not a reserved word.
+New instance is typically what this method is called the instance fields.
 
-So in other words we can say var fa is assigned is.
+If there are immutable types such as string, then you don't have to do anything special with them.
 
-So the identifier in this instance, in this context is okay, which are type names like classes, interfaces
+They're automatically protected for you.
 
-and in OMS are not allowed.
+But if they're mutable types, like a string builder or an ArrayList, then you've got to be careful.
 
-So there's the fire virus.
+Do not share the references around either when they're coming in or when you're sending them back out.
 
-Okay.
+Use techniques like defensive copying or advanced encapsulation.
 
-But if you name your class or your enum or your interface where you're going to get a problem.
+They're the same idea.
 
-I want to know.
+So now going to include how to create an immutable object in code.
 
-Have a look at private interface methods.
+It's taken from my Japanese OCR course, the ones that zero interface, and if you're familiar with
 
-Introduced in Java nine interfaces can now have private methods.
+creating immutable types, then you can skip along for the next 10 minutes.
 
-These private methods can be both static and non static.
+So this is a department class that we are trying to make immutable.
 
-As they are private, they are accessible within the interface only.
+We've made it final so you can add subclasses and all the methods are final as a result.
 
-As with classes, you cannot access a non static interface method from a static method.
+So if I come down here and try to subclasses.
 
-There have to advantages.
+You'll see that there is a problem there.
 
-One is to reduce code duplication and the other is to improve code encapsulation.
+Now this particular example, rather than having a public or package private constructor, I've gone
 
-Let's have a look at this in code so you can see on lines three, four and five.
+with the private constructor, the other methodology for creating it.
 
-I have comments there.
+So you cannot subclass this class because this constructor cannot be invoked from the subclass.
 
-Why were private interface methods introduced when one was to reduce code duplication and the other
+Constructors are not in hearses anywhere, but private ones are particularly a problem when you are
 
-one was to improve encapsulation by hiding implementation details?
+in subtype.
 
-We look at both of these now.
+So if I took off final there, now I'm down here to subtype materials where they're put.
 
-Here I have an interface inefficient tennis.
+Now you've got a problem here in that the parent department constructor has private access, so you're
 
-There's lots of code duplication here.
+doubly protected.
 
-I have three methods in here a static one, a default one, and another default one.
+So I'll make that final again.
 
-Forehand, backhand and smash, respectively.
+Now the instant variables are private and final.
 
-Each of them have got three system development lines move into position, hitting a forehand, move
+I've got immutable strings.
 
-back into ready position.
+I have parameters.
 
-That's the first one.
+And I assure you that doesn't matter either.
 
-The forehand.
+They'll be protected because called by value.
 
-Backhand is very similar, except it's hitting a backhand and smash.
+You're just going to copy the primitive.
 
-Very similar, except it's hitting a smash.
+It's when you've references, you have to be careful.
 
-Let's look at how we could write in Java nine a more efficient interface.
+References to immutable types are fine.
 
-So now you can see interface tennis.
+References to mutable ones require defensive copying.
 
-There's a lot less code involved.
+In this case.
 
-I've now introduced a method which takes in a string and the variable is called stroke.
+I'm going to show you the one that breaks encapsulation and then would show what happens.
 
-It is a private static method.
+And then we fix it and we show how that fixes it.
 
-Obviously to have code in there.
+So this is taking it in a realist it's called from this public static method create new instance where
 
-It has to be static or default.
-
-And I'm putting movement position which was common across the methods in the previous version and moved
-
-back into ready position was also common.
-
-This is called duplication has been addressed already.
-
-Hitting a particular stroke than is what's online 30.
-
-So I've got a four eye method which is static, just to mix up the various method types I've got at
-
-934, I've got a default back and one and then I've got another private one called Smash Unknown 35
-
-and each of these call that private his method.
-
-Remember, we're inside the interface, so I can call it I've access to it.
-
-So I'm hitting the 433, hitting the back online 34 and hitting the smash on line 35.
-
-So I can call the private static method called hit from a static context.
+I return a new department calling the private constructor from within the class.
 
 That's no problem.
 
-From a default method, that's no problem.
+But I'm passing in the ArrayList that's going to be passed in and I'm storing the reference that I'm
 
-I'm from another private method.
+getting in.
 
-That's no problem either.
+That's the problem.
 
-That's addressing the code duplication.
+All get methods, no set methods.
 
-So we went.
+That's fine.
 
-As you can see, the interface inefficient tennis lots of duplication called there to a lot less in
+However, this method is returning to reference.
 
-the interface tennis.
+That's breaking encapsulation a second time.
 
-What about point to which was to improve encapsulation by hiding implementation details?
+So here we are in the man.
 
-Well, let's look at Main here.
+We're creating a rare list of employees and we're adding an.
 
-I'm declaring tennis type.
+And Liam.
 
-That's the reference called tennis and it's new professional tennis.
+And then we're going to create a department create new instance passing analogous at lone to an employee's.
 
-With that tennis reference, I cannot access the hit method.
+Could open what we create there.
 
-There is no he's.
+They're going to call on.
 
-I get a compiler error if I try to call.
+I'm going to get back the name of the department put into a local variable name, address, get the
 
-There is no method called Hitler.
+number of employees and get the employees into the list.
 
-Can it be applied?
+We are overwriting the ArrayList reference with the one returned.
 
-It is encapsulated inside in the tennis interface.
+What did we retrieve back?
 
-It is private to us, so I cannot access it.
+We'll actually have retrieved the same.
 
-Now I can access the backhand and I can.
+Now we're all going to try to do is in mad, which is in a different class completely.
 
-That's the forehand.
+We're going to try and change the status of our immutable class.
 
-That's the static method.
+We should not be able to do it.
 
-So I will use the interface name itself tennis to access that.
+So what we're getting back here is name.
 
-If I run that.
+We're going to try and change it to Boots.
 
-Moving into position, hitting the backhand, moving back into the ready position, moving into position,
+Got to change the address to Galway.
 
-hitting a forehand and moving back into the right position.
+What we're going to find is that strings are immutable, so there are new objects created in the background.
 
-Now, notice that if I go up here.
+Therefore, our original ones are left untouched.
 
-And take the static off that.
+Privileges are fine because they're very simple.
 
-I've got a problem on line 33.
+Just the premises is copied.
 
-Calling a non static method from a static context or a static method is a problem.
+This is going to be a problem now.
 
-And that's what the comments on line 24, 25 and 26 are explaining.
+Okay.
 
-If you're in a class, for example, I'll duplicate that very quickly down here in Maine.
+This is a comment relating to the correct code, as opposed to what I've just shown you.
 
-And I come along and I'll put in a method.
+Okay.
 
-Just call it X.
+And this output reflects the correct operation as well.
 
-It's an instance method.
+But you'll see now when I run it that the employees have been changed.
 
-And if I go along here.
+In other words, Tom is now in the department when I wrote us.
 
-And I tried to call.
+So we created there's the employees and leave and afterwards.
 
-From a static method.
+Now Tom is in.
 
-I've got a problem.
+The employee list.
 
-I would need an instance of private interface methods to be able to call that it's an instance method.
+That's a problem.
 
-So it needs an instance.
+Everything else is fine.
 
-And there you can see now the error has gone away.
+That lawn.
 
-So that's the same idea here.
+Arrogance.
 
-If you're inside a static method, you can call a non static method.
+Arrogance.
 
-And the last thing was just very simply, you might think, Oh yeah, I can just go and quote something
+That lawn.
 
-like that.
+That's the one we broke.
 
-You can't.
+Encapsulation.
 
-That is an abstract method by default.
+So if I go back.
 
-And they cannot have a method body.
+And put in.
 
-That's what the complaint is.
+The defense of copying.
 
-They're.
+What I'm doing here is I've been passed in a reference to an ArrayList and I am creating a new ArrayList
 
-Abstract methods cannot have the body.
+based on the data.
 
-So I come back out and I'll put static back in here.
+So I'm not using the reference that was passed in.
 
-Now let's try and make that default and see what happens.
+Yes, I want the ArrayList data, but I don't want the reference to that object.
 
-Ken Static is going to have a problem there.
+I want to create a new one.
 
-So it's essentially if you're inside a static method, you want to call another method inside the interface.
+And what?
 
-That other method needs to be static, static to static.
+I'm sending it back out.
 
-Note also that private and default those two modifiers can not be put together because they both mean
+I'm going to do the same thing.
 
-two different things.
+Send back out a new ArrayList reference based on the data.
 
-The default is intended to be used by types that implements the interface, whereas private means that
+So if I run it now, you'll see that and and Liam are the only two that's defensive copy in its advanced
 
-it's just private to the interface.
+encapsulation.
 
-And if I make it static, the arrow goes away.
+What I'd like to look at is how that looks on a board in memory.
 
-So that's the private interface methods, why they were introduced, the rules around them and examples
+So in this example, we are not using defense of copying and we are breaking encapsulation.
 
-in code.
+So as you can see over in Maine, we create an array list and we add, add and leave to us.
+
+So here's in Maine purple.
+
+There's the employees we had an ad lib to had taken a little bit of liberties because of space.
+
+I then created two instance passing in Argus at launch two and the employees.
+
+So there's the department being created.
+
+There's the employees referring to the same object.
+
+That's the problem.
+
+There's an employee's primitive.
+
+There's the address reference to a string.
+
+This is for the address.
+
+That lawn.
+
+And then there for Argus.
+
+Then we come along and we say, okay, let's use the reference to get them to give us back and name
+
+inside and main there is name and it's called refer to the same object.
+
+However, this object is immutable.
+
+It's a string saying get address, giving us an address.
+
+The gnome employees that comes back with just copy the primitive.
+
+Remember, if it's a reference call by value, you're going to get back a copy of the reference.
+
+That and that copy of the reference.
+
+If it's a primitive, you just get a copy of the primitive and the value is placed inside.
+
+And the employees.
+
+Well, it's the same reference that we've got back.
+
+We're replacing it, but it's the same one anyway.
+
+We then come along and we decide that we want to change the name to boots there.
+
+But strings are immutable.
+
+So what happens there is the following.
+
+Because that's a mutual cannot change it.
+
+Therefore it goes to here in the address we try to change it to Galway.
+
+Yes, it's referring to the same object, but that is a beautiful soul.
+
+You cannot change it.
+
+What it does.
+
+Is it makes it refer to a new string object.
+
+We changed the number of employees to three.
+
+That's fine.
+
+We just changed that to three.
+
+And then we add Tom.
+
+This is the problem here.
+
+We come along.
+
+We could just add Tom.
+
+Now we've changed the ArrayList that employees look at, and that's breaking encapsulation.
+
+So now what I'd like to look at is properly encapsulating it using defensive copying.
+
+What does that look like?
+
+The court that you see on the right is going to be the same.
+
+It's just the code that I showed you in the previous clip whereby in the constructor, creating a new
+
+object with the data.
+
+And what we're returning back employees, we're creating a new object again, and we're passing the
+
+reference to that new object back.
+
+Now, the next diagram, I'll only concentrate on the employee's bit that's giving a problem.
+
+The rest works the same way.
+
+So just quickly to refresh.
+
+Advanced encapsulation, defensive copying.
+
+Is this style here where you create a new array list?
+
+In this case, it's a realist.
+
+Based on the data that's been passed in.
+
+And when you're returning it, you create another object again based on the data.
+
+So let's look at that on the board.
+
+So we're down here in Maine and we've got our employees.
+
+And Liam, that's the realist.
+
+When we go and we construct the object using the public static method, their static methods, we say
+
+class name does that.
+
+The name we now with the constructor will go to create a completely new object based on the contents.
+
+And in Liam.
+
+So you have a reference to that.
+
+Now when you call the guests employees method, don't.
+
+Here again, we're going to return a new object.
+
+And what we're doing is we're overwriting the employee's reference.
+
+There's two new object being created.
+
+Does it matter what the reference is?
+
+It's just a reference to their and employees is now going to be made to point to that object there.
+
+Now, when we add Tom in there, we change this guy here.
+
+Tom is in that particular ArrayList and not our immutable classes, ArrayList.
+
+This is untouched.
+
+That's why you have to use defense of copying if you have mutable instance variables.
+
+Immutable ones are fine like strings because when they make changes, another object will be created
+
+and your original one will be fine.
+
+Primitives are okay because you just get a copy of the whole primitive.
+
+That's fine.
+
+Don't make a change to the copy.
+
+And that's not going to affect you.
+
+Mutable objects.
+
+They're the ones you have to watch out for.
+
+String builder ArrayList are two that are commonly used.
+
+You have to use defense of copy and create a copy on the way in.
+
+And create a copy.
+
+On the way back out.
+
+Injection attacks.
+
+There are two types of injection attacks as capital injection attacks and command injection attacks
+
+as scale injection.
+
+This is where the user input retrieves unexpected results and you gain protection from this by using
+
+prepared statement with bind variables and not statement.
+
+I see an example of that in a second now.
+
+Command injection is where the operating system commands are used to retrieve unexpected results.
+
+Production is provided via input validation using whitelist and or security policies, applying the
+
+principle of least privilege.
+
+Applying the two of them together provides what's known as defense in depth.
+
+Just as an aside, a whitelist is stating what is allowed, whereas a blacklist is catering for what's
+
+not allowed and it's often easier to cater for what is allowed.
+
+Major, you have to keep us updated.
+
+Let's have a look at as well injection, an attack and how prepared statement prevents the attack.
+
+So as with my gdb section, I had this in napping there so I'm using that means is force.
+
+What I'll do is I'll show you first of all in action.
+
+I'm going to come along here and I am going to use a statement to retrieve that branch code from a bank
+
+account table.
+
+The bank table has the branch code, the account number, and then details about the customer, including
+
+their bank balance.
+
+I run that.
+
+There you can see there's the branch code.
+
+One, two, three, four, five, six.
+
+And then there's one account number in there and there's the customer name.
+
+That's the only account that is in that particular branch at this point in time.
+
+The next line that we're going to execute is on line 84, and that's where you see the scroll injection
+
+attack card.
+
+So there you can see it's set to one, two, three, four, five, six.
+
+That's the branch code or the branch code is not null.
+
+So what that's going to do is it's going to return back all of the branches in this table and all of
+
+the details that go with the branches, the account numbers, the customer names, the customer details,
+
+including their bank balances.
+
+And there is a very small table which you can see there are different branch codes coming back there.
+
+One, two, three, four, five, six and then six twos and then six threes.
+
+All the different customer details, the account numbers, their addresses and their balances.
+
+Obviously, this is not what you want.
+
+Now let's just make sure that the prepared step and versions.
+
+Work for the one that should work.
+
+One, two, three, four, five, six.
+
+Yes.
+
+And then for the one that has the nefarious as well, we should get nothing back.
+
+And the reason that is that that piece of school that we're passing in to the method online 80 years
+
+is actually being matched to the branch code column and obviously it doesn't match.
+
+Therefore, we're getting nothing back.
+
+So how do we achieve that?
+
+Well, let's go to the one that is susceptible to the actual injection attack, the one that uses statement.
+
+There.
+
+You can see we're just passing in the branch code and line 30 there.
+
+We're creating the statement on line 33 or executing it.
+
+Then for all of the rules we kept back, we just look through them and create bank accounts.
+
+Let's look at how a prepared statement with bind variables fixes that.
+
+Now we're using a bind variable in our squad statement on line 54.
+
+And we're creating a prepared statement on line 57.
+
+We're setting the buying variable online, 59 to whatever was the school that was passed into the method.
+
+If it's a valid branch code, you'll come back with a valid branch rule.
+
+If it's not, you get minus one and there'll be no bank account creation.
+
+So to protect yourself from fuel injection, use prepared statement with bind variables or to now have
+
+a look at a command injection attack.
+
+So we need to be familiar with the directory structure to understand this.
+
+So I've got a farm enterprise inside that.
+
+I have animals, cattle and sheep and the various breeds of cattle and sheep that run the farm for cattle
+
+you've got Angus and Hereford and for sheep we've got Suffolk.
+
+They each are full.
+
+Two, however, is restricted and we don't want people to be able to access that inside.
+
+There have got a staff subfolder with two staff that are on the farm, but also the ones that have been
+
+disciplined.
+
+For example, Joe Bloggs has been disciplined.
+
+So if we look at the command injection method on line 11, we create the console by using system console.
+
+We then prompt the user to enter a directory on line 13 online 14.
+
+We read what the user's typed in online 15.
+
+We use the that get to create a path to the sea, call on the farm animals and then we append on the
+
+folder that the user has typed in.
+
+We then online 16 using the tray with resources create a stream of paths.
+
+We're going to walk this file path.
+
+We're going to go down through all of the folders that are from that folder down.
+
+So we're c calling farm animals and whatever the user typed in.
+
+So we're filtering each of these pads to figure out what are the files that end with dot text.
+
+So after we have filtered them, we will output them to the screen.
+
+So if the user types in cattle, we will end up with Angus Star text and her for that text.
+
+So when I run this, there you can see the two text files.
+
+Angus The text and her for that text are output when I enter in the directory cattle.
+
+However, if the user types in dot dot as the directory now the stream will create paths from c colon
+
+backslash the firm and that will include all of the animals folders, etc..
+
+So you've got cattle and sheep.
+
+That's fine.
+
+However, crucially, you're now going to get everything in here, Char, and you'll know just from
+
+the name of the text file that your bloggs has been disciplined.
+
+This is not what you want.
+
+So let's look at how we would fix that.
+
+We'll look at the command injection whitelist version.
+
+Now this is the exact same method except online 28.
+
+We have introduced a whitelist which is basically a check to see.
+
+Have you typed in a valid folder name.
+
+So is the directory that you're looking to search cattle or is it sheep?
+
+And if it is, we will proceed with creating the stream and outputting the text files from those folders
+
+down.
+
+If not, as we say, online, 37 will output an invalid directory entered.
+
+So here is the output when you try to type in dot dot with this version.
+
+As you can see, it comes up with invalid directory entered, which is what you want.
+
+Now wife is has to be kept up to date with changes that you want.
+
+So if we introduce another folder in there that we want the user to be able to look at, it might be
+
+horses.
+
+We'll have to change like 28.
+
+However, this is easier than trying to maintain a blacklist.
+
+A blacklist is trying to figure out what are the wrong things that can be typed in here.
+
+And you have to be one step ahead of the bad guys, essentially for that to work.
+
+So sometimes it's a balancing act.
+
+Security policies can be used in addition to or instead of a whitelist to prevent command injection
+
+attacks.
+
+If both are applied, then this creates a layered security approach called defense in depth.
+
+So if a hacker gets past one layer, they're faced with another layer.
+
+So here's an example of a policy they're very straightforward to read.
+
+Well, granting read permission on the job logs dot text file.
+
+Here is another one in this case where we're granting read and write permissions on the same job logs.
+
+Text file.
+
+Be careful that the policy obeys the principle of least privilege.
+
+In other words, if your program only needs to read a file, then it should only have read permission
+
+and not have right to access denial of service attacks.
+
+A denial of service attack is where one or more requests are made with the intention of disrupting services
+
+for everyone else.
+
+This can be accomplished in a number of ways.
+
+One of the main ways is leaking resources.
+
+If a hacker figures out that your method opens up a file but doesn't close it, then they can repeatedly
+
+called a method and eventually you'll run out of memory.
+
+So the solution to that is to always use try with resources to ensure that you do not leak your resources
+
+by not closing them.
+
+Another potential issue is working with extremely large files.
+
+Let's say you take in a file, you do some processing and you output a new file.
+
+That's all very fine and well with a small file, but potentially with a very large file, you could
+
+run out of memory inclusion attacks or where a file contains several other files.
+
+These are often called zip bombs, so you have to be aware of that as well.
+
+Other issues could be very large data structures like an array.
+
+Typically what you need to do there is to check that the array size is okay.
+
+And finally, some guidelines for confidential information.
+
+What is confidential information?
+
+Well, information like passwords and any personal details such as address, date of birth, salary
+
+and account balances.
+
+They are all private personal details and they are therefore confidential.
+
+Obviously, sensitive data should never be up to the screen logged.
+
+End up in an exception.
+
+Stack trace.
+
+Debt in memory must also be protected because if your program crashes, a dump file may be created.
+
+And things to bear in mind here will be to use a kothari instead of string.
+
+You'll note that the system console uses a read password.
+
+When it's reading in a password, it goes into a character array as opposed to a string.
+
+If it was a string, it could be kept in the string pool where it could exist in memory long after the
+
+code that uses it has run.
+
+Setting confidential object references to NULL as soon as you're done with them.
+
+This makes these objects immediately eligible for garbage collection.
+
+And the whole principle here is that you should have confidential data in memory for as short a time
+
+as possible.
+
+This gives the hacker less time to do anything.
