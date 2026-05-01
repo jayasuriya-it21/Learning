@@ -176,158 +176,6 @@ REMOVED
 
 ***
 
-# ✅ ✅ BE‑002 CHANGE (IMPORTANT UPDATE)
-
-## ❌ OLD BEHAVIOR
-
-```java
-candidate.setCandidateStatus(ASSIGNED);  ❌ REMOVE THIS
-```
-
-***
-
-## ✅ NEW BEHAVIOR
-
-### Only:
-
-```java
-UserAction → ASSIGNED ✅
-```
-
-👉 DO NOT change CandidateProfile status
-
-***
-
-# ✅ ✅ Updated BE‑002 Logic
-
-Change your service like this:
-
-***
-
-## ✅ ✅ UPDATE THIS PART
-
-### ❌ REMOVE
-
-```java
-candidate.setCandidateStatus(CandidateStatus.ASSIGNED);
-candidateProfileRepository.save(candidate);
-```
-
-***
-
-### ✅ KEEP ONLY THIS
-
-```java
-userAction.setUpdatedCandidateStatus(CandidateStatus.ASSIGNED);
-```
-
-***
-
-# ✅ ✅ Query Logic (CRITICAL PART)
-
-Now your APIs must behave like this:
-
-***
-
-## ✅ View All Candidates Page
-
-```sql
-WHERE candidateStatus != SELECTED
-AND candidateStatus != REMOVED
-```
-
-✅ returns global candidates
-
-***
-
-## ✅ Shortlisted Page
-
-```sql
-FROM user_action
-WHERE user_id = currentUser
-AND updatedCandidateStatus = SHORTLISTED
-```
-
-***
-
-## ✅ Assigned To Me
-
-```sql
-FROM candidate_assignment
-WHERE assigned_to_user_id = currentUser
-AND is_active = true
-```
-
-***
-
-## ✅ Assigned By Me
-
-```sql
-WHERE assigned_by_user_id = currentUser
-```
-
-***
-
-# ✅ ✅ Important Change Required in UserAction
-
-Your current constraint:
-
-```java
-@UniqueConstraint(columnNames = { "user_id", "candidate_id" })
-```
-
-✅ KEEP THIS ✅
-
-Why?
-
-👉 Because each user has **only ONE state per candidate**
-
-✔ Clean  
-✔ Simple  
-✔ No duplicates
-
-***
-
-# ✅ ✅ Updated Service Logic (Core Rule)
-
-Replace:
-
-```java
-userAction = find or create
-```
-
-✅ ALWAYS DO:
-
-```java
-Optional<UserAction> existing =
-    userActionRepository.findByUser_UserIdAndCandidate_CandidateId(userId, candidateId);
-
-if (existing.isPresent()) {
-    userAction = existing.get();
-} else {
-    userAction = new UserAction();
-    userAction.setUser(user);
-    userAction.setCandidate(candidate);
-    userAction.setCreatedBy(userId);
-}
-
-userAction.setUpdatedCandidateStatus(CandidateStatus.ASSIGNED);
-userAction.setUpdateReason(request.getInstruction());
-userAction.setUpdatedBy(userId);
-
-userActionRepository.save(userAction);
-```
-
-***
-
-# ✅ ✅ FINAL ANSWER TO YOUR QUESTION
-
-> ❓ “how to connect both tables?”
-
-### ✅ Answer:
-
-👉 **DON’T connect by logic — connect by purpose**
-
 | Table            | Purpose      |
 | ---------------- | ------------ |
 | CandidateProfile | GLOBAL state |
@@ -369,6 +217,263 @@ You now have:
 
 ***
 
-# ✅ 🚀 NEXT STEP (VERY IMPORTANT)
+# CandidateStatusDto updateCandidateStatus() Method Changes
+***
 
-Now your BE‑002 is correct ✅
+# ❌ CURRENT PROBLEM
+
+Your method:
+
+```java
+candidate.setCandidateStatus(request.getStatus());
+candidateProfileRepository.save(candidate);
+```
+
+***
+
+## ❌ Why this is WRONG now
+
+In your new architecture:
+
+### ✅ CandidateProfile is ONLY for GLOBAL STATUS
+
+Allowed:
+
+*   ACTIVE
+*   SELECTED ✅
+*   REMOVED ✅
+
+***
+
+### ❌ But your method allows:
+
+```java
+SHORTLISTED ❌
+REJECTED ❌
+ASSIGNED ❌
+```
+
+👉 This **breaks your design**
+👉 It will cause:
+
+*   wrong visibility
+*   users affecting each other ❌
+
+***
+
+# ✅ ✅ FIX (VERY IMPORTANT)
+
+## ✅ Rule:
+
+### ✅ ONLY update CandidateProfile for:
+
+*   SELECTED ✅
+*   REMOVED ✅
+
+***
+
+# ✅ ✅ EXACT FIX YOU MUST DO
+
+***
+
+## ✅ 🔹 1. REMOVE THIS LINE
+
+```java
+candidate.setCandidateStatus(request.getStatus());
+```
+
+***
+
+## ✅ 🔹 2. ADD CONTROLLED UPDATE
+
+Replace with:
+
+```java
+// ✅ Update global status ONLY for SELECTED or REMOVED
+if (request.getStatus() == CandidateStatus.SELECTED
+        || request.getStatus() == CandidateStatus.REMOVED) {
+
+    candidate.setCandidateStatus(request.getStatus());
+    candidate.setUpdatedBy(user.getUserId());
+    candidateProfileRepository.save(candidate);
+}
+```
+
+***
+
+# ✅ ✅ RESULT
+
+| Status      | Where stored |
+| ----------- | ------------ |
+| SHORTLISTED | UserAction ✅ |
+| REJECTED    | UserAction ✅ |
+| ASSIGNED    | UserAction ✅ |
+| SELECTED    | BOTH ✅       |
+| REMOVED     | BOTH ✅       |
+
+***
+
+# ✅ ✅ NEXT FIX (VERY IMPORTANT)
+
+## ❌ Current logic
+
+```java
+UserAction statusRecord = userActionRepository
+        .findByUserUserIdAndCandidateCandidateId(...)
+        .orElseGet(UserAction::new);
+```
+
+👉 But you don’t initialize fields properly when new.
+
+***
+
+## ✅ ✅ FIX THIS BLOCK
+
+Replace with:
+
+```java
+UserAction statusRecord = userActionRepository
+        .findByUserUserIdAndCandidateCandidateId(userId, request.getCandidateId())
+        .orElseGet(() -> {
+            UserAction newAction = new UserAction();
+            newAction.setUser(user);
+            newAction.setCandidate(candidate);
+            newAction.setCreatedBy(user.getUserId());
+            return newAction;
+        });
+```
+
+***
+
+# ✅ ✅ KEEP THIS PART ✅
+
+```java
+statusRecord.setUpdatedCandidateStatus(request.getStatus());
+statusRecord.setUpdateReason(request.getReason());
+statusRecord.setUpdatedBy(user.getUserId());
+```
+
+***
+
+# ✅ 🔥 OPTIONAL BUT STRONGLY RECOMMENDED
+
+## ✅ Prevent illegal status change
+
+Add validation:
+
+```java
+if (request.getStatus() == CandidateStatus.ASSIGNED) {
+    throw new BadRequestException("Use Assign API instead");
+}
+```
+
+***
+
+# ✅ ✅ FINAL CORRECT FLOW
+
+## When user clicks:
+
+### ✅ SHORTLIST
+
+*   Only UserAction updated ✅
+
+***
+
+### ✅ REJECT
+
+*   Only UserAction updated ✅
+
+***
+
+### ✅ ASSIGN
+
+*   Done via BE‑002 ✅
+
+***
+
+### ✅ SELECT ✅ (IMPORTANT)
+
+*   CandidateProfile updated ✅
+*   UserAction updated ✅
+
+***
+
+# ✅ ✅ FINAL VERSION (CLEAN)
+
+Here is your corrected method:
+
+```java
+public CandidateStatusDto updateCandidateStatus(
+        UpdateCandidateStatusRequestDto request,
+        String userId) {
+
+    User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException(ProEvaConstants.noUser));
+
+    CandidateProfile candidate = candidateProfileRepository
+            .findById(request.getCandidateId())
+            .orElseThrow(() -> new RuntimeException(ProEvaConstants.noCandidtae));
+
+    // ❌ Prevent misuse
+    if (request.getStatus() == CandidateStatus.ASSIGNED) {
+        throw new BadRequestException("Use Assign API for assigning candidates");
+    }
+
+    // ✅ Update/Create UserAction
+    UserAction statusRecord = userActionRepository
+            .findByUserUserIdAndCandidateCandidateId(
+                    userId, request.getCandidateId())
+            .orElseGet(() -> {
+                UserAction newAction = new UserAction();
+                newAction.setUser(user);
+                newAction.setCandidate(candidate);
+                newAction.setCreatedBy(user.getUserId());
+                return newAction;
+            });
+
+    statusRecord.setUpdatedCandidateStatus(request.getStatus());
+    statusRecord.setUpdateReason(request.getReason());
+    statusRecord.setUpdatedBy(user.getUserId());
+
+    userActionRepository.save(statusRecord);
+
+    // ✅ Update global status only when needed
+    if (request.getStatus() == CandidateStatus.SELECTED
+            || request.getStatus() == CandidateStatus.REMOVED) {
+
+        candidate.setCandidateStatus(request.getStatus());
+        candidate.setUpdatedBy(user.getUserId());
+        candidateProfileRepository.save(candidate);
+    }
+
+    CandidateStatusDto responseDto = new CandidateStatusDto();
+    responseDto.setCandidateData(
+            CandidateMapperToDto.mapToCandidateProfileResponseDto(candidate));
+    responseDto.setStatus(request.getStatus());
+    responseDto.setReason(request.getReason());
+    responseDto.setStatusUpdatedAt(user.getUpdatedAt());
+
+    return responseDto;
+}
+```
+
+***
+
+# ✅ ✅ FINAL VERDICT
+
+| Part         | Status                 |
+| ------------ | ---------------------- |
+| Your logic   | ✅ close                |
+| Current code | ❌ breaks design        |
+| After fix    | ✅ perfect architecture |
+
+***
+
+# 🚀 NEXT
+
+Now your system is aligned:
+
+👉 BE‑002 ✅  
+👉 Status update ✅
+
+***
